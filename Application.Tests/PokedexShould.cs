@@ -36,7 +36,8 @@ public class PokedexShould
             "Poison"
         };
         var fakePokemon = new Pokemon(1, fakeNames, fakeTypes, fakeStats);
-        var list = new List<Pokemon>
+        
+        var pokemonList = new List<Pokemon>
         {
             fakePokemon
         };
@@ -44,7 +45,7 @@ public class PokedexShould
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
 
-        db.ReadPokemon().Returns(list);
+        db.ReadPokemon().Returns(pokemonList);
         
         //Act
         var pokemon = pokedex.FindPokemonById(1);
@@ -57,8 +58,6 @@ public class PokedexShould
     [Fact]
     public void ReturnPokemonWithId2()
     {
-        var pokedex = Substitute.For<IPokedex>();
-
         var fakeNames = new Dictionary<string, string>
         {
             {"english", "Ivysaur"},
@@ -81,15 +80,28 @@ public class PokedexShould
             "Poison"
         };
         var fakePokemon = new Pokemon(2, fakeNames, fakeTypes, fakeStats);
+        
+        var pokemonList = new List<Pokemon>
+        {
+            fakePokemon
+        };
+        
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
 
-        pokedex.FindPokemonById(2).Returns(fakePokemon);
+        db.ReadPokemon().Returns(pokemonList);
+        
+        //Act
+        var pokemon = pokedex.FindPokemonById(2);
+        
+        //Assert
+        pokemon.Should().BeSameAs(fakePokemon);
+        db.Received(1).ReadPokemon();
     }
     
     [Fact]
     public void ReturnPokemonWithId3()
     {
-        var pokedex = Substitute.For<IPokedex>();
-
         var fakeNames = new Dictionary<string, string>
         {
             {"english", "Venusaur"},
@@ -113,14 +125,27 @@ public class PokedexShould
         };
         var fakePokemon = new Pokemon(3, fakeNames, fakeTypes, fakeStats);
 
-        pokedex.FindPokemonById(3).Returns(fakePokemon);
+        var pokemonList = new List<Pokemon>
+        {
+            fakePokemon
+        };
+        
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+
+        db.ReadPokemon().Returns(pokemonList);
+        
+        //Act
+        var pokemon = pokedex.FindPokemonById(3);
+        
+        //Assert
+        pokemon.Should().BeSameAs(fakePokemon);
+        db.Received(1).ReadPokemon();
     }
 
     [Fact]
-    public void ReturnPokemonListFromType()
+    public void ReturnPokemonListFromTypeGrass()
     {
-        var pokedex = Substitute.For<IPokedex>();
-        
         #region pokemones
         var pokemonOne = new Pokemon(1,
             new Dictionary<string, string>
@@ -145,28 +170,26 @@ public class PokedexShould
                 {"Speed", 60}
             }
         );
-        
-        var pokemonTwo = new Pokemon(2,
+        var pokemonTwo = new Pokemon(4,
             new Dictionary<string, string>
             {
-                {"english", "Bulbasaur"},
-                {"japanese", "フシギダネ"},
-                {"chinese", "妙蛙种子"},
-                {"french", "Bulbizarre"}
+                {"english", "Charmander"},
+                {"japanese", "ヒトカゲ"},
+                {"chinese", "小火龙"},
+                {"french", "Salamèche"}
             },
             new List<string>
             {
-                "Grass",
-                "Poison"
+                "Fire"
             },
             new Dictionary<string, int>
             {
-                {"HP", 45},
-                {"Attack", 49},
-                {"Defense", 49},
-                {"Sp. Attack", 65},
-                {"Sp. Defense", 65},
-                {"Speed", 45}
+                {"HP", 39},
+                {"Attack", 52 },
+                {"Defense", 43},
+                {"Sp. Attack", 60},
+                {"Sp. Defense", 50},
+                {"Speed", 65}
             }
         );
         #endregion
@@ -176,15 +199,28 @@ public class PokedexShould
             pokemonOne,
             pokemonTwo
         };
+
+        var pokemonExpected = new List<Pokemon>()
+        {
+            pokemonOne
+        };
         
-        pokedex.FindByType("Grass").Returns(pokemonList);
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+
+        db.ReadPokemon().Returns(pokemonList);
+        
+        //Act
+        var pokemon = pokedex.FindByType("Grass");
+        
+        //Assert
+        pokemon.Should().BeEquivalentTo(pokemonExpected);
+        db.Received(1).ReadPokemon();
     }
 
     [Fact]
     public void ReturnAllPokemon()
     {
-        var pokedex = Substitute.For<IPokedex>();
-        
         #region pokemones
         var pokemonOne = new Pokemon(1,
             new Dictionary<string, string>
@@ -209,28 +245,26 @@ public class PokedexShould
                 {"Speed", 60}
             }
         );
-        
-        var pokemonTwo = new Pokemon(2,
+        var pokemonTwo = new Pokemon(4,
             new Dictionary<string, string>
             {
-                {"english", "Bulbasaur"},
-                {"japanese", "フシギダネ"},
-                {"chinese", "妙蛙种子"},
-                {"french", "Bulbizarre"}
+                {"english", "Charmander"},
+                {"japanese", "ヒトカゲ"},
+                {"chinese", "小火龙"},
+                {"french", "Salamèche"}
             },
             new List<string>
             {
-                "Grass",
-                "Poison"
+                "Fire"
             },
             new Dictionary<string, int>
             {
-                {"HP", 45},
-                {"Attack", 49},
-                {"Defense", 49},
-                {"Sp. Attack", 65},
-                {"Sp. Defense", 65},
-                {"Speed", 45}
+                {"HP", 39},
+                {"Attack", 52 },
+                {"Defense", 43},
+                {"Sp. Attack", 60},
+                {"Sp. Defense", 50},
+                {"Speed", 65}
             }
         );
         #endregion
@@ -240,7 +274,17 @@ public class PokedexShould
             pokemonOne,
             pokemonTwo
         };
+
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+
+        db.ReadPokemon().Returns(pokemonList);
         
-        pokedex.GetAll().Returns(pokemonList);
+        //Act
+        var pokemon = pokedex.GetAll();
+        
+        //Assert
+        pokemon.Should().BeSameAs(pokemonList);
+        db.Received(1).ReadPokemon();
     }
 }
