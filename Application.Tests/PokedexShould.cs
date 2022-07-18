@@ -106,10 +106,65 @@ public class PokedexShould
     [Fact]
     public void ReturnPokemonListFromType()
     {
-        var pokedex = new Pokedex();
-        var actualPokemon = pokedex.FindByType("Grass");
+        var pokedex = Substitute.For<IPokedex>();
+        
+        #region pokemones
+        var pokemonOne = new Pokemon(1,
+            new Dictionary<string, string>
+            {
+                {"english", "Ivysaur"},
+                {"japanese", "フシギソウ"},
+                {"chinese", "妙蛙草"},
+                {"french", "Herbizarre"}
+            },
+            new List<string>
+            {
+                "Grass",
+                "Poison"
+            },
+            new Dictionary<string, int>
+            {
+                {"HP", 60},
+                {"Attack", 62},
+                {"Defense", 63},
+                {"Sp. Attack", 80},
+                {"Sp. Defense", 80},
+                {"Speed", 60}
+            }
+        );
+        
+        var pokemonTwo = new Pokemon(2,
+            new Dictionary<string, string>
+            {
+                {"english", "Bulbasaur"},
+                {"japanese", "フシギダネ"},
+                {"chinese", "妙蛙种子"},
+                {"french", "Bulbizarre"}
+            },
+            new List<string>
+            {
+                "Grass",
+                "Poison"
+            },
+            new Dictionary<string, int>
+            {
+                {"HP", 45},
+                {"Attack", 49},
+                {"Defense", 49},
+                {"Sp. Attack", 65},
+                {"Sp. Defense", 65},
+                {"Speed", 45}
+            }
+        );
+        #endregion
 
-        actualPokemon.Should().NotBeEmpty();
+        var pokemonList = new List<Pokemon>()
+        {
+            pokemonOne,
+            pokemonTwo
+        };
+        
+        pokedex.FindByType("Grass").Returns(pokemonList);
     }
 
     [Theory]
