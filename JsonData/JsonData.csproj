@@ -11,4 +11,9 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="pokedex.json" />
+      <EmbeddedResource Include="pokedex.json" />
+    </ItemGroup>
+
 </Project>

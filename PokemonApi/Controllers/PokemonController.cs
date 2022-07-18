@@ -10,6 +10,13 @@ public class PokemonController : ControllerBase
 {
     
     [HttpGet]
+    public List<Pokemon> Get()
+    {
+        var pokedex = new Pokedex();
+        return pokedex.GetAll();
+    }
+    
+    [HttpGet]
     [Route("{id}")]
     public Pokemon Get(int id)
     {
@@ -25,10 +32,4 @@ public class PokemonController : ControllerBase
         return pokedex.FindByType(type);
     }
     
-    [HttpGet]
-    public List<Pokemon> Get()
-    {
-        var pokedex = new Pokedex();
-        return pokedex.GetAll();
-    }
 }

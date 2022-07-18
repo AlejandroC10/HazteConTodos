@@ -6,9 +6,11 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Xunit;
 using PokemonApi;
+using VerifyXunit;
 
 namespace PokemonApiTests.Controllers;
 
+[UsesVerify]
 public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepApplicationFactory<Program>>
 {
     private readonly HttpClient client;
@@ -56,9 +58,8 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     {
         var response = await client.GetAsync("/Pokemon/Type/Ghost");
         var responseContent = await response.Content.ReadAsStringAsync();
-        var foundedPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(responseContent);
-
-        foundedPokemon.Count.Should().Be(43);
+        
+        await Verifier.VerifyJson(responseContent); 
     }
     
     
