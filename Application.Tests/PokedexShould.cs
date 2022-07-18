@@ -13,8 +13,7 @@ public class PokedexShould
     [Fact]
     public void ReturnPokemonWithId1()
     {
-        var pokedex = Substitute.For<IPokedex>();
-
+        // Arrange
         var fakeNames = new Dictionary<string, string>
         {
             {"english", "Bulbasaur"},
@@ -37,8 +36,22 @@ public class PokedexShould
             "Poison"
         };
         var fakePokemon = new Pokemon(1, fakeNames, fakeTypes, fakeStats);
+        var list = new List<Pokemon>
+        {
+            fakePokemon
+        };
         
-        pokedex.FindPokemonById(1).Returns(fakePokemon);
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+
+        db.ReadPokemon().Returns(list);
+        
+        //Act
+        var pokemon = pokedex.FindPokemonById(1);
+        
+        //Assert
+        pokemon.Should().BeSameAs(fakePokemon);
+        db.Received(1).ReadPokemon();
     }
     
     [Fact]

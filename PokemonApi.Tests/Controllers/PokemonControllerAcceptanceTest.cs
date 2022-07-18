@@ -61,8 +61,7 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         
         await Verifier.VerifyJson(responseContent);
     }
-    
-    
+
     [Fact]
     public async Task ShowPokemones()
     {

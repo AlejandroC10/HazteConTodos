@@ -1,14 +1,21 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Json;
+using Json.Interfaces;
 
 namespace Application;
 
 public class Pokedex : IPokedex
 {
+    private readonly IPokemonDb pokemonDb;
+
+    public Pokedex(IPokemonDb pokemonDb)
+    {
+        this.pokemonDb = pokemonDb;
+    }
+    
     public Pokemon FindPokemonById(int id)
     {
-        var pokemonDb = new PokemonDb();
         var pokemonList = pokemonDb.ReadPokemon();
 
         foreach (var pokemon in pokemonList)
@@ -19,12 +26,11 @@ public class Pokedex : IPokedex
             }   
         }
 
-        return null;
+        throw new ArgumentOutOfRangeException(nameof(id));
     }
 
     public List<Pokemon> FindByType(string type)
     {
-        var pokemonDb = new PokemonDb();
         var pokemonList = pokemonDb.ReadPokemon();
 
         var matchPokemon = new List<Pokemon>();
@@ -42,7 +48,6 @@ public class Pokedex : IPokedex
 
     public List<Pokemon> GetAll()
     {
-        var pokemonDb = new PokemonDb();
         var pokemonList = pokemonDb.ReadPokemon();
         return pokemonList;
     }

@@ -1,5 +1,6 @@
 using Application;
 using Domain;
+using Json;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PokemonApi.Controllers;
@@ -12,7 +13,8 @@ public class PokemonController : ControllerBase
     [HttpGet]
     public List<Pokemon> Get()
     {
-        var pokedex = new Pokedex();
+        var db = new PokemonDb();
+        var pokedex = new Pokedex(db);
         return pokedex.GetAll();
     }
     
@@ -20,7 +22,8 @@ public class PokemonController : ControllerBase
     [Route("{id}")]
     public Pokemon Get(int id)
     {
-        var pokedex = new Pokedex();
+        var db = new PokemonDb();
+        var pokedex = new Pokedex(db);
         return pokedex.FindPokemonById(id);
     }
     
@@ -28,7 +31,8 @@ public class PokemonController : ControllerBase
     [Route("Type/{type}")]
     public List<Pokemon> Get(string type)
     {
-        var pokedex = new Pokedex();
+        var db = new PokemonDb();
+        var pokedex = new Pokedex(db);
         return pokedex.FindByType(type);
     }
     
