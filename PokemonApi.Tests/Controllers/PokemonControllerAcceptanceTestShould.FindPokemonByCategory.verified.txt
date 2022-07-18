@@ -1,0 +1,896 @@
+﻿[
+  {
+    id: 92,
+    name: {
+      chinese: 鬼斯,
+      english: Gastly,
+      french: Fantominus,
+      japanese: ゴース
+    },
+    stats: {
+      Attack: 35,
+      Defense: 30,
+      HP: 30,
+      Sp. Attack: 100,
+      Sp. Defense: 35,
+      Speed: 80
+    },
+    type: [
+      Ghost,
+      Poison
+    ]
+  },
+  {
+    id: 93,
+    name: {
+      chinese: 鬼斯通,
+      english: Haunter,
+      french: Spectrum,
+      japanese: ゴースト
+    },
+    stats: {
+      Attack: 50,
+      Defense: 45,
+      HP: 45,
+      Sp. Attack: 115,
+      Sp. Defense: 55,
+      Speed: 95
+    },
+    type: [
+      Ghost,
+      Poison
+    ]
+  },
+  {
+    id: 94,
+    name: {
+      chinese: 耿鬼,
+      english: Gengar,
+      french: Ectoplasma,
+      japanese: ゲンガー
+    },
+    stats: {
+      Attack: 65,
+      Defense: 60,
+      HP: 60,
+      Sp. Attack: 130,
+      Sp. Defense: 75,
+      Speed: 110
+    },
+    type: [
+      Ghost,
+      Poison
+    ]
+  },
+  {
+    id: 200,
+    name: {
+      chinese: 梦妖,
+      english: Misdreavus,
+      french: Feuforêve,
+      japanese: ムウマ
+    },
+    stats: {
+      Attack: 60,
+      Defense: 60,
+      HP: 60,
+      Sp. Attack: 85,
+      Sp. Defense: 85,
+      Speed: 85
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 292,
+    name: {
+      chinese: 脱壳忍者,
+      english: Shedinja,
+      french: Munja,
+      japanese: ヌケニン
+    },
+    stats: {
+      Attack: 90,
+      Defense: 45,
+      HP: 1,
+      Sp. Attack: 30,
+      Sp. Defense: 30,
+      Speed: 40
+    },
+    type: [
+      Bug,
+      Ghost
+    ]
+  },
+  {
+    id: 302,
+    name: {
+      chinese: 勾魂眼,
+      english: Sableye,
+      french: Ténéfix,
+      japanese: ヤミラミ
+    },
+    stats: {
+      Attack: 75,
+      Defense: 75,
+      HP: 50,
+      Sp. Attack: 65,
+      Sp. Defense: 65,
+      Speed: 50
+    },
+    type: [
+      Dark,
+      Ghost
+    ]
+  },
+  {
+    id: 353,
+    name: {
+      chinese: 怨影娃娃,
+      english: Shuppet,
+      french: Polichombr,
+      japanese: カゲボウズ
+    },
+    stats: {
+      Attack: 75,
+      Defense: 35,
+      HP: 44,
+      Sp. Attack: 63,
+      Sp. Defense: 33,
+      Speed: 45
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 354,
+    name: {
+      chinese: 诅咒娃娃,
+      english: Banette,
+      french: Branette,
+      japanese: ジュペッタ
+    },
+    stats: {
+      Attack: 115,
+      Defense: 65,
+      HP: 64,
+      Sp. Attack: 83,
+      Sp. Defense: 63,
+      Speed: 65
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 355,
+    name: {
+      chinese: 夜巡灵,
+      english: Duskull,
+      french: Skelénox,
+      japanese: ヨマワル
+    },
+    stats: {
+      Attack: 40,
+      Defense: 90,
+      HP: 20,
+      Sp. Attack: 30,
+      Sp. Defense: 90,
+      Speed: 25
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 356,
+    name: {
+      chinese: 彷徨夜灵,
+      english: Dusclops,
+      french: Téraclope,
+      japanese: サマヨール
+    },
+    stats: {
+      Attack: 70,
+      Defense: 130,
+      HP: 40,
+      Sp. Attack: 60,
+      Sp. Defense: 130,
+      Speed: 25
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 425,
+    name: {
+      chinese: 飘飘球,
+      english: Drifloon,
+      french: Baudrive,
+      japanese: フワンテ
+    },
+    stats: {
+      Attack: 50,
+      Defense: 34,
+      HP: 90,
+      Sp. Attack: 60,
+      Sp. Defense: 44,
+      Speed: 70
+    },
+    type: [
+      Ghost,
+      Flying
+    ]
+  },
+  {
+    id: 426,
+    name: {
+      chinese: 随风球,
+      english: Drifblim,
+      french: Grodrive,
+      japanese: フワライド
+    },
+    stats: {
+      Attack: 80,
+      Defense: 44,
+      HP: 150,
+      Sp. Attack: 90,
+      Sp. Defense: 54,
+      Speed: 80
+    },
+    type: [
+      Ghost,
+      Flying
+    ]
+  },
+  {
+    id: 429,
+    name: {
+      chinese: 梦妖魔,
+      english: Mismagius,
+      french: Magirêve,
+      japanese: ムウマージ
+    },
+    stats: {
+      Attack: 60,
+      Defense: 60,
+      HP: 60,
+      Sp. Attack: 105,
+      Sp. Defense: 105,
+      Speed: 105
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 442,
+    name: {
+      chinese: 花岩怪,
+      english: Spiritomb,
+      french: Spiritomb,
+      japanese: ミカルゲ
+    },
+    stats: {
+      Attack: 92,
+      Defense: 108,
+      HP: 50,
+      Sp. Attack: 92,
+      Sp. Defense: 108,
+      Speed: 35
+    },
+    type: [
+      Ghost,
+      Dark
+    ]
+  },
+  {
+    id: 477,
+    name: {
+      chinese: 黑夜魔灵,
+      english: Dusknoir,
+      french: Noctunoir,
+      japanese: ヨノワール
+    },
+    stats: {
+      Attack: 100,
+      Defense: 135,
+      HP: 45,
+      Sp. Attack: 65,
+      Sp. Defense: 135,
+      Speed: 45
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 478,
+    name: {
+      chinese: 雪妖女,
+      english: Froslass,
+      french: Momartik,
+      japanese: ユキメノコ
+    },
+    stats: {
+      Attack: 80,
+      Defense: 70,
+      HP: 70,
+      Sp. Attack: 80,
+      Sp. Defense: 70,
+      Speed: 110
+    },
+    type: [
+      Ice,
+      Ghost
+    ]
+  },
+  {
+    id: 479,
+    name: {
+      chinese: 洛托姆,
+      english: Rotom,
+      french: Motisma,
+      japanese: ロトム
+    },
+    stats: {
+      Attack: 50,
+      Defense: 77,
+      HP: 50,
+      Sp. Attack: 95,
+      Sp. Defense: 77,
+      Speed: 91
+    },
+    type: [
+      Electric,
+      Ghost
+    ]
+  },
+  {
+    id: 487,
+    name: {
+      chinese: 骑拉帝纳,
+      english: Giratina,
+      french: Giratina,
+      japanese: ギラティナ
+    },
+    stats: {
+      Attack: 100,
+      Defense: 120,
+      HP: 150,
+      Sp. Attack: 100,
+      Sp. Defense: 120,
+      Speed: 90
+    },
+    type: [
+      Ghost,
+      Dragon
+    ]
+  },
+  {
+    id: 562,
+    name: {
+      chinese: 哭哭面具,
+      english: Yamask,
+      french: Tutafeh,
+      japanese: デスマス
+    },
+    stats: {
+      Attack: 30,
+      Defense: 85,
+      HP: 38,
+      Sp. Attack: 55,
+      Sp. Defense: 65,
+      Speed: 30
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 563,
+    name: {
+      chinese: 死神棺,
+      english: Cofagrigus,
+      french: Tutankafer,
+      japanese: デスカーン
+    },
+    stats: {
+      Attack: 50,
+      Defense: 145,
+      HP: 58,
+      Sp. Attack: 95,
+      Sp. Defense: 105,
+      Speed: 30
+    },
+    type: [
+      Ghost
+    ]
+  },
+  {
+    id: 592,
+    name: {
+      chinese: 轻飘飘,
+      english: Frillish,
+      french: Viskuse,
+      japanese: プルリル
+    },
+    stats: {
+      Attack: 40,
+      Defense: 50,
+      HP: 55,
+      Sp. Attack: 65,
+      Sp. Defense: 85,
+      Speed: 40
+    },
+    type: [
+      Water,
+      Ghost
+    ]
+  },
+  {
+    id: 593,
+    name: {
+      chinese: 胖嘟嘟,
+      english: Jellicent,
+      french: Moyade,
+      japanese: ブルンゲル
+    },
+    stats: {
+      Attack: 60,
+      Defense: 70,
+      HP: 100,
+      Sp. Attack: 85,
+      Sp. Defense: 105,
+      Speed: 60
+    },
+    type: [
+      Water,
+      Ghost
+    ]
+  },
+  {
+    id: 607,
+    name: {
+      chinese: 烛光灵,
+      english: Litwick,
+      french: Funécire,
+      japanese: ヒトモシ
+    },
+    stats: {
+      Attack: 30,
+      Defense: 55,
+      HP: 50,
+      Sp. Attack: 65,
+      Sp. Defense: 55,
+      Speed: 20
+    },
+    type: [
+      Ghost,
+      Fire
+    ]
+  },
+  {
+    id: 608,
+    name: {
+      chinese: 灯火幽灵,
+      english: Lampent,
+      french: Mélancolux,
+      japanese: ランプラー
+    },
+    stats: {
+      Attack: 40,
+      Defense: 60,
+      HP: 60,
+      Sp. Attack: 95,
+      Sp. Defense: 60,
+      Speed: 55
+    },
+    type: [
+      Ghost,
+      Fire
+    ]
+  },
+  {
+    id: 609,
+    name: {
+      chinese: 水晶灯火灵,
+      english: Chandelure,
+      french: Lugulabre,
+      japanese: シャンデラ
+    },
+    stats: {
+      Attack: 55,
+      Defense: 90,
+      HP: 60,
+      Sp. Attack: 145,
+      Sp. Defense: 90,
+      Speed: 80
+    },
+    type: [
+      Ghost,
+      Fire
+    ]
+  },
+  {
+    id: 622,
+    name: {
+      chinese: 泥偶小人,
+      english: Golett,
+      french: Gringolem,
+      japanese: ゴビット
+    },
+    stats: {
+      Attack: 74,
+      Defense: 50,
+      HP: 59,
+      Sp. Attack: 35,
+      Sp. Defense: 50,
+      Speed: 35
+    },
+    type: [
+      Ground,
+      Ghost
+    ]
+  },
+  {
+    id: 623,
+    name: {
+      chinese: 泥偶巨人,
+      english: Golurk,
+      french: Golemastoc,
+      japanese: ゴルーグ
+    },
+    stats: {
+      Attack: 124,
+      Defense: 80,
+      HP: 89,
+      Sp. Attack: 55,
+      Sp. Defense: 80,
+      Speed: 55
+    },
+    type: [
+      Ground,
+      Ghost
+    ]
+  },
+  {
+    id: 679,
+    name: {
+      chinese: 独剑鞘,
+      english: Honedge,
+      french: Monorpale,
+      japanese: ヒトツキ
+    },
+    stats: {
+      Attack: 80,
+      Defense: 100,
+      HP: 45,
+      Sp. Attack: 35,
+      Sp. Defense: 37,
+      Speed: 28
+    },
+    type: [
+      Steel,
+      Ghost
+    ]
+  },
+  {
+    id: 680,
+    name: {
+      chinese: 双剑鞘,
+      english: Doublade,
+      french: Dimoclès,
+      japanese: ニダンギル
+    },
+    stats: {
+      Attack: 110,
+      Defense: 150,
+      HP: 59,
+      Sp. Attack: 45,
+      Sp. Defense: 49,
+      Speed: 35
+    },
+    type: [
+      Steel,
+      Ghost
+    ]
+  },
+  {
+    id: 681,
+    name: {
+      chinese: 坚盾剑怪,
+      english: Aegislash,
+      french: Exagide,
+      japanese: ギルガルド
+    },
+    stats: {
+      Attack: 50,
+      Defense: 150,
+      HP: 60,
+      Sp. Attack: 50,
+      Sp. Defense: 150,
+      Speed: 60
+    },
+    type: [
+      Steel,
+      Ghost
+    ]
+  },
+  {
+    id: 708,
+    name: {
+      chinese: 小木灵,
+      english: Phantump,
+      french: Brocélôme,
+      japanese: ボクレー
+    },
+    stats: {
+      Attack: 70,
+      Defense: 48,
+      HP: 43,
+      Sp. Attack: 50,
+      Sp. Defense: 60,
+      Speed: 38
+    },
+    type: [
+      Ghost,
+      Grass
+    ]
+  },
+  {
+    id: 709,
+    name: {
+      chinese: 朽木妖,
+      english: Trevenant,
+      french: Desséliande,
+      japanese: オーロット
+    },
+    stats: {
+      Attack: 110,
+      Defense: 76,
+      HP: 85,
+      Sp. Attack: 65,
+      Sp. Defense: 82,
+      Speed: 56
+    },
+    type: [
+      Ghost,
+      Grass
+    ]
+  },
+  {
+    id: 710,
+    name: {
+      chinese: 南瓜精,
+      english: Pumpkaboo,
+      french: Pitrouille,
+      japanese: バケッチャ
+    },
+    stats: {
+      Attack: 66,
+      Defense: 70,
+      HP: 59,
+      Sp. Attack: 44,
+      Sp. Defense: 55,
+      Speed: 41
+    },
+    type: [
+      Ghost,
+      Grass
+    ]
+  },
+  {
+    id: 711,
+    name: {
+      chinese: 南瓜怪人,
+      english: Gourgeist,
+      french: Banshitrouye,
+      japanese: パンプジン
+    },
+    stats: {
+      Attack: 100,
+      Defense: 122,
+      HP: 85,
+      Sp. Attack: 58,
+      Sp. Defense: 75,
+      Speed: 54
+    },
+    type: [
+      Ghost,
+      Grass
+    ]
+  },
+  {
+    id: 720,
+    name: {
+      chinese: 胡帕,
+      english: Hoopa,
+      french: Hoopa,
+      japanese: フーパ
+    },
+    stats: {
+      Attack: 110,
+      Defense: 60,
+      HP: 80,
+      Sp. Attack: 150,
+      Sp. Defense: 130,
+      Speed: 70
+    },
+    type: [
+      Psychic,
+      Ghost
+    ]
+  },
+  {
+    id: 724,
+    name: {
+      chinese: 狙射树枭,
+      english: Decidueye,
+      french: Archéduc,
+      japanese: ジュナイパー
+    },
+    stats: {
+      Attack: 107,
+      Defense: 75,
+      HP: 78,
+      Sp. Attack: 100,
+      Sp. Defense: 100,
+      Speed: 70
+    },
+    type: [
+      Grass,
+      Ghost
+    ]
+  },
+  {
+    id: 769,
+    name: {
+      chinese: 沙丘娃,
+      english: Sandygast,
+      french: Bacabouh,
+      japanese: スナバァ
+    },
+    stats: {
+      Attack: 55,
+      Defense: 80,
+      HP: 55,
+      Sp. Attack: 70,
+      Sp. Defense: 45,
+      Speed: 15
+    },
+    type: [
+      Ghost,
+      Ground
+    ]
+  },
+  {
+    id: 770,
+    name: {
+      chinese: 噬沙堡爷,
+      english: Palossand,
+      french: Trépassable,
+      japanese: シロデスナ
+    },
+    stats: {
+      Attack: 75,
+      Defense: 110,
+      HP: 85,
+      Sp. Attack: 100,
+      Sp. Defense: 75,
+      Speed: 35
+    },
+    type: [
+      Ghost,
+      Ground
+    ]
+  },
+  {
+    id: 778,
+    name: {
+      chinese: 谜拟Ｑ,
+      english: Mimikyu,
+      french: Denticrisse,
+      japanese: ミミッキュ
+    },
+    stats: {
+      Attack: 90,
+      Defense: 80,
+      HP: 55,
+      Sp. Attack: 50,
+      Sp. Defense: 105,
+      Speed: 96
+    },
+    type: [
+      Ghost,
+      Fairy
+    ]
+  },
+  {
+    id: 781,
+    name: {
+      chinese: 破破舵轮,
+      english: Dhelmise,
+      french: Bébécaille,
+      japanese: ダダリン
+    },
+    stats: {
+      Attack: 131,
+      Defense: 100,
+      HP: 70,
+      Sp. Attack: 86,
+      Sp. Defense: 90,
+      Speed: 40
+    },
+    type: [
+      Ghost,
+      Grass
+    ]
+  },
+  {
+    id: 792,
+    name: {
+      chinese: 露奈雅拉,
+      english: Lunala,
+      french: Zéroïd,
+      japanese: ルナアーラ
+    },
+    stats: {
+      Attack: 113,
+      Defense: 89,
+      HP: 137,
+      Sp. Attack: 137,
+      Sp. Defense: 107,
+      Speed: 97
+    },
+    type: [
+      Psychic,
+      Ghost
+    ]
+  },
+  {
+    id: 802,
+    name: {
+      chinese: 玛夏多,
+      english: Marshadow,
+      french: Vémini,
+      japanese: マーシャドー
+    },
+    stats: {
+      Attack: 125,
+      Defense: 80,
+      HP: 90,
+      Sp. Attack: 90,
+      Sp. Defense: 90,
+      Speed: 125
+    },
+    type: [
+      Fighting,
+      Ghost
+    ]
+  },
+  {
+    id: 806,
+    name: {
+      chinese: 砰头小丑,
+      english: Blacephalon,
+      french: Zeraora,
+      japanese: ズガドーン
+    },
+    stats: {
+      Attack: 127,
+      Defense: 53,
+      HP: 53,
+      Sp. Attack: 151,
+      Sp. Defense: 79,
+      Speed: 107
+    },
+    type: [
+      Fire,
+      Ghost
+    ]
+  }
+]

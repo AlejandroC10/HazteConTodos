@@ -1,14 +1,11 @@
-﻿using Domain;
+﻿using Application.Interfaces;
+using Domain;
 using Json;
 
 namespace Application;
 
-public class Pokedex
+public class Pokedex : IPokedex
 {
-    /*
-    private static PokemonDb pokemonDb;
-    private List<Pokemon> pokemonList = pokemonDb.ReadPokemon();
-    */
     public Pokemon FindPokemonById(int id)
     {
         var pokemonDb = new PokemonDb();

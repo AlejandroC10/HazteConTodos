@@ -59,7 +59,7 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         var response = await client.GetAsync("/Pokemon/Type/Ghost");
         var responseContent = await response.Content.ReadAsStringAsync();
         
-        await Verifier.VerifyJson(responseContent); 
+        await Verifier.VerifyJson(responseContent);
     }
     
     

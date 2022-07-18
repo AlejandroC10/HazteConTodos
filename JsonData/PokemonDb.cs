@@ -2,10 +2,11 @@
 using Domain;
 using System.IO;
 using System.Reflection;
+using Json.Interfaces;
 
 namespace Json;
 
-public class PokemonDb
+public class PokemonDb : IPokemonDb
 {
     public List<Pokemon> ReadPokemon()
     {

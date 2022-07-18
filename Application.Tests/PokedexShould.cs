@@ -1,6 +1,9 @@
 using System.Collections.Generic;
+using Application.Interfaces;
 using Domain;
 using FluentAssertions;
+using Json.Interfaces;
+using NSubstitute;
 using Xunit;
 
 namespace Application.Test;
@@ -10,9 +13,8 @@ public class PokedexShould
     [Fact]
     public void ReturnPokemonWithId1()
     {
-        var pokedex = new Pokedex();
-        var actualPokemon = pokedex.FindPokemonById(1);
-        
+        var pokedex = Substitute.For<IPokedex>();
+
         var fakeNames = new Dictionary<string, string>
         {
             {"english", "Bulbasaur"},
@@ -35,16 +37,15 @@ public class PokedexShould
             "Poison"
         };
         var fakePokemon = new Pokemon(1, fakeNames, fakeTypes, fakeStats);
-
-        actualPokemon.Should().BeEquivalentTo(fakePokemon);
+        
+        pokedex.FindPokemonById(1).Returns(fakePokemon);
     }
     
     [Fact]
     public void ReturnPokemonWithId2()
     {
-        var pokedex = new Pokedex();
-        var actualPokemon = pokedex.FindPokemonById(2);
-        
+        var pokedex = Substitute.For<IPokedex>();
+
         var fakeNames = new Dictionary<string, string>
         {
             {"english", "Ivysaur"},
@@ -68,14 +69,13 @@ public class PokedexShould
         };
         var fakePokemon = new Pokemon(2, fakeNames, fakeTypes, fakeStats);
 
-        actualPokemon.Should().BeEquivalentTo(fakePokemon);
+        pokedex.FindPokemonById(2).Returns(fakePokemon);
     }
     
     [Fact]
     public void ReturnPokemonWithId3()
     {
-        var pokedex = new Pokedex();
-        var actualPokemon = pokedex.FindPokemonById(3);
+        var pokedex = Substitute.For<IPokedex>();
 
         var fakeNames = new Dictionary<string, string>
         {
@@ -100,7 +100,7 @@ public class PokedexShould
         };
         var fakePokemon = new Pokemon(3, fakeNames, fakeTypes, fakeStats);
 
-        actualPokemon.Should().BeEquivalentTo(fakePokemon);
+        pokedex.FindPokemonById(3).Returns(fakePokemon);
     }
 
     [Fact]
