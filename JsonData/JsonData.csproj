@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="pokedexFalsa.json" />
       <None Remove="pokedex.json" />
       <EmbeddedResource Include="pokedex.json" />
     </ItemGroup>

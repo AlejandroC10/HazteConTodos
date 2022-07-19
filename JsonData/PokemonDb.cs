@@ -6,7 +6,7 @@ using Json.Interfaces;
 
 namespace Json;
 
-public class PokemonDb : IPokemonDb
+public class PokemonDb: IPokemonDb
 {
     public List<Pokemon> ReadPokemon()
     {
