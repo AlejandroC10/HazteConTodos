@@ -51,4 +51,9 @@ public class Pokedex : IPokedex
         var pokemonList = pokemonDb.ReadPokemon();
         return pokemonList;
     }
+
+    public void DeleteById(int id)
+    {
+        
+    }
 }

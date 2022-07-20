@@ -7,5 +7,5 @@ public interface IPokedex
     public Pokemon FindPokemonById(int id);
     public List<Pokemon> FindByType(string type);
     public List<Pokemon> GetAll();
-
+    public void DeleteById(int id);
 }

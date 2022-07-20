@@ -22,4 +22,9 @@ public class PokemonDb: IPokemonDb
         }
         return pokemonList;
     }
+
+    public void DeletePokemon()
+    {
+        
+    }
 }
