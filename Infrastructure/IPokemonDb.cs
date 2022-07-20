@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Json;
+namespace Infrastructure;
 
 public interface IPokemonDb
 {

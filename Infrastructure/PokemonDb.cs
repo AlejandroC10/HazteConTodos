@@ -3,7 +3,7 @@ using Domain;
 using System.IO;
 using System.Reflection;
 
-namespace Json;
+namespace Infrastructure;
 
 public class PokemonDb: IPokemonDb
 {

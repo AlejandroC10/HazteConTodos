@@ -1,6 +1,6 @@
 using Application;
 using Domain;
-using Json;
+using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PokemonApi.Controllers;
