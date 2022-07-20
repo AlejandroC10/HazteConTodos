@@ -23,8 +23,20 @@ public class PokemonDb: IPokemonDb
         return pokemonList;
     }
 
-    public void DeletePokemon()
+    public void DeletePokemon(int id, List<Pokemon> db)
     {
+        var pokemonToDelete = db.Find(pokemon => pokemon.Id == 1);
+        if (pokemonToDelete == null)
+        {
+            throw new ArgumentNullException(nameof(id));
+        }
         
+        db.Remove(pokemonToDelete);
+        
+        var assembly = Assembly.GetExecutingAssembly();
+        var fileName = assembly.GetManifestResourceStream("Json.pokedex.json");
+        var sb = new StreamWriter(fileName);
+        var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(db);
+        sb.Write(jsonContent);
     }
 }

@@ -296,10 +296,10 @@ public class PokedexShould
         var pokemonOne = new Pokemon(1,
             new Dictionary<string, string>
             {
-                {"english", "Ivysaur"},
-                {"japanese", "フシギソウ"},
-                {"chinese", "妙蛙草"},
-                {"french", "Herbizarre"}
+                {"english", "Bulbasaur"},
+                {"japanese", "フシギダネ"},
+                {"chinese", "妙蛙种子"},
+                {"french", "Bulbizarre"}
             },
             new List<string>
             {
@@ -308,12 +308,12 @@ public class PokedexShould
             },
             new Dictionary<string, int>
             {
-                {"HP", 60},
-                {"Attack", 62},
-                {"Defense", 63},
-                {"Sp. Attack", 80},
-                {"Sp. Defense", 80},
-                {"Speed", 60}
+                {"HP", 45},
+                {"Attack", 49},
+                {"Defense", 49},
+                {"Sp. Attack", 65},
+                {"Sp. Defense", 65},
+                {"Speed", 45}
             }
         );
         var pokemonTwo = new Pokemon(4,
@@ -331,7 +331,7 @@ public class PokedexShould
             new Dictionary<string, int>
             {
                 {"HP", 39},
-                {"Attack", 52 },
+                {"Attack", 52},
                 {"Defense", 43},
                 {"Sp. Attack", 60},
                 {"Sp. Defense", 50},
@@ -348,18 +348,19 @@ public class PokedexShould
 
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
-        
         db.ReadPokemon().Returns(pokemonList);
-        
+
         //Act
         pokedex.DeleteById(1);
+        
+        pokemonList.Remove(pokemonOne);
+        db.ReadPokemon().Returns(pokemonList);
+        
         var finalPokemonList = pokedex.GetAll();
-        
-        
+
         //Assert
         finalPokemonList.Should().NotContain(pokemonOne);
-        pokedex.Received(1).DeleteById(1);
-        db.Received(1).DeletePokemon();
+        db.Received(1).DeletePokemon(1, pokemonList);
         db.Received(2).ReadPokemon();
     }
 }
