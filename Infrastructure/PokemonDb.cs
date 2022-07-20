@@ -23,8 +23,9 @@ public class PokemonDb: IPokemonDb
         return pokemonList;
     }
 
-    public void DeletePokemon(int id, List<Pokemon> db)
+    public void DeletePokemon(int id)
     {
+        var db = ReadPokemon();
         var pokemonToDelete = db.Find(pokemon => pokemon.Id == 1);
         if (pokemonToDelete == null)
         {

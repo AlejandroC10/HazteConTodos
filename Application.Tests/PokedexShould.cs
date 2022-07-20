@@ -360,7 +360,7 @@ public class PokedexShould
 
         //Assert
         finalPokemonList.Should().NotContain(pokemonOne);
-        db.Received(1).DeletePokemon(1, pokemonList);
-        db.Received(2).ReadPokemon();
+        db.Received(1).DeletePokemon(1);
+        db.Received(1).ReadPokemon();
     }
 }
