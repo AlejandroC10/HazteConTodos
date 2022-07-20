@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Json;
-using Json.Interfaces;
 
 namespace Application;
 

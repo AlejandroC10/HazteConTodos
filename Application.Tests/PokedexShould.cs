@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Application.Interfaces;
 using Domain;
 using FluentAssertions;
-using Json.Interfaces;
+using Json;
 using NSubstitute;
 using Xunit;
 
