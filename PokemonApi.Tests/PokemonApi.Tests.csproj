@@ -32,4 +32,15 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\PokemonApi\PokemonApi.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Update="PokemonControllerAcceptanceTestShould.FindPokemonByCategory.verified.txt.bak">
+        <ParentFile>PokemonControllerAcceptanceTestShould</ParentFile>
+        <DependentUpon>PokemonControllerAcceptanceTestShould.cs</DependentUpon>
+      </None>
+      <None Update="PokemonControllerAcceptanceTestShould.FindPokemonByCategory.verified.txt">
+        <ParentFile>PokemonControllerAcceptanceTestShould</ParentFile>
+        <DependentUpon>PokemonControllerAcceptanceTestShould.cs</DependentUpon>
+      </None>
+    </ItemGroup>
 </Project>
