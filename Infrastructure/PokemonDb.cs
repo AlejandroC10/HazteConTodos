@@ -2,6 +2,7 @@
 using Domain;
 using System.IO;
 using System.Reflection;
+using System.Xml;
 
 namespace Infrastructure;
 
@@ -9,10 +10,8 @@ public class PokemonDb: IPokemonDb
 {
     public List<Pokemon> ReadPokemon()
     {
-        var assembly = Assembly.GetExecutingAssembly();
-        var fileName = assembly.GetManifestResourceStream("Json.pokedex.json");
-        var sb = new StreamReader(fileName);
-        var jsonString = sb.ReadToEnd();
+        var jsonString = File.ReadAllText("pokedex.json");
+
         var pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonString);
         
         if (pokemonList == null)
@@ -33,10 +32,9 @@ public class PokemonDb: IPokemonDb
         
         db.Remove(pokemonToDelete);
         
-        var assembly = Assembly.GetExecutingAssembly();
-        var fileName = assembly.GetManifestResourceStream("Json.pokedex.json");
-        var sb = new StreamWriter(fileName);
+        
         var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(db);
-        sb.Write(jsonContent);
+        File.WriteAllText("pokedex.json", jsonContent);
+
     }
 }

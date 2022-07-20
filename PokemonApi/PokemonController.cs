@@ -36,4 +36,15 @@ public class PokemonController : ControllerBase
         return pokedex.FindByType(type);
     }
     
+    [HttpDelete]
+    [Route("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var db = new PokemonDb();
+        var pokedex = new Pokedex(db);
+        pokedex.DeleteById(id);
+        
+        return Ok();
+    }
+    
 }
