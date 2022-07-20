@@ -1,11 +1,11 @@
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Domain;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Xunit;
-using PokemonApi;
 using VerifyXunit;
 
 namespace PokemonApiTests.Controllers;
@@ -70,5 +70,43 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         var foundedPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(responseContent);
 
         foundedPokemon.Count.Should().Be(809);
+    }
+
+    [Fact]
+    public async Task DeletePokemon()
+    {
+        // Arrange
+        var fakeNames = new Dictionary<string, string>
+        {
+            {"english", "Bulbasaur"},
+            {"japanese", "フシギダネ"},
+            {"chinese", "妙蛙种子"},
+            {"french", "Bulbizarre"}
+        };
+        var fakeStats = new Dictionary<string, int>
+        {
+            {"HP", 45},
+            {"Attack", 49},
+            {"Defense", 49},
+            {"Sp. Attack", 65},
+            {"Sp. Defense", 65},
+            {"Speed", 45}
+        };
+        var fakeTypes = new List<string>
+        {
+            "Grass",
+            "Poison"
+        };
+        var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
+        
+        // Act
+        var response = await client.DeleteAsync("/Pokemon/1");
+        var pokemonList = await client.GetAsync("/Pokemon");
+        var pokemonListResponse = await pokemonList.Content.ReadAsStringAsync();
+        var foundPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(pokemonListResponse);
+        
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        foundPokemon.Should().NotContain(fakePokemon);
     }
 }
