@@ -1,19 +1,20 @@
-﻿using System.Text.Json;
-using Domain;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Xml;
+using System.Text.Json;
+using Domain;
+using Infrastructure;
 
-namespace Infrastructure;
+namespace PokemonApiTests.Controllers;
 
-public class PokemonDb: IPokemonDb
+public class PokemonDbTest : IPokemonDb
 {
     public List<Pokemon> ReadPokemon()
     {
-        //var path = Assembly.GetExecutingAssembly().Location;
         var path = AppDomain.CurrentDomain.BaseDirectory;
         
-        var jsonString = File.ReadAllText(Path.Combine(path,"pokedex.json"));
+        var jsonString = File.ReadAllText(Path.Combine(path,"pokedexFalsa.json"));
 
         var pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonString);
         
@@ -39,7 +40,6 @@ public class PokemonDb: IPokemonDb
         var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(db);
         
         var path = Assembly.GetExecutingAssembly().Location;
-        File.WriteAllText(Path.Combine(path,"pokedex.json"), jsonContent);
-
+        File.WriteAllText(Path.Combine(path,"pokedexFalsa.json"), jsonContent);
     }
 }

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Domain;
 using FluentAssertions;
+using Infrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using VerifyXunit;
@@ -69,7 +70,7 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         var responseContent = await response.Content.ReadAsStringAsync();
         var foundedPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(responseContent);
 
-        foundedPokemon.Count.Should().Be(809);
+        foundedPokemon.Count.Should().Be(14);
     }
 
     [Fact]
@@ -98,15 +99,19 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
             "Poison"
         };
         var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
+
+        IPokemonDb pokemonDbTest = new PokemonDbTest();
         
         // Act
         var response = await client.DeleteAsync("/Pokemon/1");
-        /*var pokemonList = await client.GetAsync("/Pokemon");
-        var pokemonListResponse = await pokemonList.Content.ReadAsStringAsync();
-        var foundPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(pokemonListResponse);
-        */
-        // Assert
+        
+        
+    
+        //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        //foundPokemon.Should().NotContain(fakePokemon);
+        
+        var updatedPokemonList = pokemonDbTest.ReadPokemon();
+        updatedPokemonList.Should().NotContain(fakePokemon);
+
     }
 }

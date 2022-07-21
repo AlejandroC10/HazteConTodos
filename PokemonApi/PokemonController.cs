@@ -9,12 +9,17 @@ namespace PokemonApi.Controllers;
 [Route("[controller]")]
 public class PokemonController : ControllerBase
 {
-    
+    private IPokemonDb pokemonDataBase;
+
+    public PokemonController(IPokemonDb pokemonDb)
+    {
+        pokemonDataBase = pokemonDb;
+    }
+
     [HttpGet]
     public List<Pokemon> Get()
     {
-        var db = new PokemonDb();
-        var pokedex = new Pokedex(db);
+        var pokedex = new Pokedex(pokemonDataBase);
         return pokedex.GetAll();
     }
     
@@ -22,8 +27,7 @@ public class PokemonController : ControllerBase
     [Route("{id}")]
     public Pokemon Get(int id)
     {
-        var db = new PokemonDb();
-        var pokedex = new Pokedex(db);
+        var pokedex = new Pokedex(pokemonDataBase);
         return pokedex.FindPokemonById(id);
     }
     
@@ -31,8 +35,7 @@ public class PokemonController : ControllerBase
     [Route("Type/{type}")]
     public List<Pokemon> Get(string type)
     {
-        var db = new PokemonDb();
-        var pokedex = new Pokedex(db);
+        var pokedex = new Pokedex(pokemonDataBase);
         return pokedex.FindByType(type);
     }
     
@@ -40,8 +43,7 @@ public class PokemonController : ControllerBase
     [Route("{id}")]
     public IActionResult Delete(int id)
     {
-        var db = new PokemonDb();
-        var pokedex = new Pokedex(db);
+        var pokedex = new Pokedex(pokemonDataBase);
         pokedex.DeleteById(id);
         
         return Ok();
