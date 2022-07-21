@@ -39,5 +39,11 @@ public class PokemonDb: IPokemonDb
 
     public void UpdatePokemon(int id, string key, int change)
     {
+        var database = ReadPokemon();
+        var pokemonToUpdate = database.Find(pokemon => pokemon.Id == id);
+        if (pokemonToUpdate == null)
+        {
+            throw new ArgumentNullException(nameof(id));
+        }
     }
 }

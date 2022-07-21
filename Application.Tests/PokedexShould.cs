@@ -371,7 +371,7 @@ public class PokedexShould
 
     public void ThrowErrorWhenPokemonDoesntExist()
     {
-        
+        // Arrange
         #region pokemones
         var pokemonOne = new Pokemon(1,
             new Dictionary<string, string>
@@ -428,10 +428,11 @@ public class PokedexShould
         var pokedex = new Pokedex(db);
         db.ReadPokemon().Returns(pokemonList);
 
-        
+        // Act
+        db.When(test => test.UpdatePokemon(810, "HP", 2)).Do(test => throw new ArgumentNullException());
         Action act = () => pokedex.ModifyPokemonById(810,"HP",2);
-
-        act.Should().Throw<ArgumentNullException>().WithParameterName("id");
         
+        // Assert
+        act.Should().Throw<ArgumentNullException>();
     }
 }
