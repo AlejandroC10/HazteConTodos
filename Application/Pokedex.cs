@@ -58,6 +58,6 @@ public class Pokedex : IPokedex
 
     public void ModifyPokemonById(int id, string key, int change)
     {
-        throw new NotImplementedException();
+        pokemonDb.UpdatePokemon(id, key, change);
     }
 }

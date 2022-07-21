@@ -36,4 +36,8 @@ public class PokemonDb: IPokemonDb
         var path = AppDomain.CurrentDomain.BaseDirectory;
         File.WriteAllText(Path.Combine(path, "pokedex.json"), jsonContent);
     }
+
+    public void UpdatePokemon(int id, string key, int change)
+    {
+    }
 }

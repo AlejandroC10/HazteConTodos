@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using Application.Interfaces;
 using Domain;
 using FluentAssertions;
 using Infrastructure;
 using NSubstitute;
+using NSubstitute.Core;
+using NSubstitute.ExceptionExtensions;
 using Xunit;
 
 namespace Application.Test;
@@ -362,5 +365,73 @@ public class PokedexShould
         finalPokemonList.Should().NotContain(pokemonOne);
         db.Received(1).DeletePokemon(1);
         db.Received(1).ReadPokemon();
+    }
+
+    [Fact]
+
+    public void ThrowErrorWhenPokemonDoesntExist()
+    {
+        
+        #region pokemones
+        var pokemonOne = new Pokemon(1,
+            new Dictionary<string, string>
+            {
+                {"english", "Bulbasaur"},
+                {"japanese", "フシギダネ"},
+                {"chinese", "妙蛙种子"},
+                {"french", "Bulbizarre"}
+            },
+            new List<string>
+            {
+                "Grass",
+                "Poison"
+            },
+            new Dictionary<string, int>
+            {
+                {"HP", 45},
+                {"Attack", 49},
+                {"Defense", 49},
+                {"Sp. Attack", 65},
+                {"Sp. Defense", 65},
+                {"Speed", 45}
+            }
+        );
+        var pokemonTwo = new Pokemon(4,
+            new Dictionary<string, string>
+            {
+                {"english", "Charmander"},
+                {"japanese", "ヒトカゲ"},
+                {"chinese", "小火龙"},
+                {"french", "Salamèche"}
+            },
+            new List<string>
+            {
+                "Fire"
+            },
+            new Dictionary<string, int>
+            {
+                {"HP", 39},
+                {"Attack", 52},
+                {"Defense", 43},
+                {"Sp. Attack", 60},
+                {"Sp. Defense", 50},
+                {"Speed", 65}
+            }
+        );
+        #endregion
+        var pokemonList = new List<Pokemon>()
+        {
+            pokemonOne,
+            pokemonTwo
+        };
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+        db.ReadPokemon().Returns(pokemonList);
+
+        
+        Action act = () => pokedex.ModifyPokemonById(810,"HP",2);
+
+        act.Should().Throw<ArgumentNullException>().WithParameterName("id");
+        
     }
 }
