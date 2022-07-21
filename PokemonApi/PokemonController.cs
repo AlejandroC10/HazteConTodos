@@ -20,7 +20,7 @@ public class PokemonController : ControllerBase
     public List<Pokemon> Get()
     {
         var pokedex = new Pokedex(pokemonDataBase);
-        return pokedex.GetAll();
+        return pokedex.FindAllPokemon();
     }
     
     [HttpGet]
@@ -36,7 +36,7 @@ public class PokemonController : ControllerBase
     public List<Pokemon> Get(string type)
     {
         var pokedex = new Pokedex(pokemonDataBase);
-        return pokedex.FindByType(type);
+        return pokedex.FindPokemonByType(type);
     }
     
     [HttpDelete]
@@ -44,7 +44,7 @@ public class PokemonController : ControllerBase
     public IActionResult Delete(int id)
     {
         var pokedex = new Pokedex(pokemonDataBase);
-        pokedex.DeleteById(id);
+        pokedex.DeletePokemonById(id);
         
         return Ok();
     }

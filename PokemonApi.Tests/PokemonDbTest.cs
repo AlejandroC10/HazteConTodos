@@ -13,10 +13,8 @@ public class PokemonDbTest : IPokemonDb
     public List<Pokemon> ReadPokemon()
     {
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        
-        var jsonString = File.ReadAllText(Path.Combine(path,"pokedexFalsa.json"));
-
-        var pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonString);
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.json"));
+        var pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
         
         if (pokemonList == null)
         {
@@ -27,19 +25,17 @@ public class PokemonDbTest : IPokemonDb
 
     public void DeletePokemon(int id)
     {
-        var db = ReadPokemon();
-        var pokemonToDelete = db.Find(pokemon => pokemon.Id == 1);
+        var database = ReadPokemon();
+        var pokemonToDelete = database.Find(pokemon => pokemon.Id == id);
         if (pokemonToDelete == null)
         {
             throw new ArgumentNullException(nameof(id));
         }
         
-        db.Remove(pokemonToDelete);
-        
-        
-        var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(db);
-        
+        database.Remove(pokemonToDelete);
+
+        var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(database);
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.WriteAllText(Path.Combine(path,"pokedexFalsa.json"), jsonContent);
+        File.WriteAllText(Path.Combine(path, "pokedex.json"), jsonContent);
     }
 }

@@ -16,9 +16,7 @@ public class CustomWepApplicationFactory<TStartup> : WebApplicationFactory<TStar
                 builder.ConfigureServices(services =>
                 {
                         var pokemonDb = services.SingleOrDefault(serviceDescriptor => serviceDescriptor.ServiceType == typeof(IPokemonDb));
-
                         services.Remove(pokemonDb);
-
                         services.AddScoped<IPokemonDb, PokemonDbTest>();
                 });
         }

@@ -211,7 +211,7 @@ public class PokedexShould
         db.ReadPokemon().Returns(pokemonList);
         
         //Act
-        var pokemon = pokedex.FindByType("Grass");
+        var pokemon = pokedex.FindPokemonByType("Grass");
         
         //Assert
         pokemon.Should().BeEquivalentTo(pokemonExpected);
@@ -281,7 +281,7 @@ public class PokedexShould
         db.ReadPokemon().Returns(pokemonList);
         
         //Act
-        var pokemon = pokedex.GetAll();
+        var pokemon = pokedex.FindAllPokemon();
         
         //Assert
         pokemon.Should().BeSameAs(pokemonList);
@@ -351,12 +351,12 @@ public class PokedexShould
         db.ReadPokemon().Returns(pokemonList);
 
         //Act
-        pokedex.DeleteById(1);
+        pokedex.DeletePokemonById(1);
         
         pokemonList.Remove(pokemonOne);
         db.ReadPokemon().Returns(pokemonList);
         
-        var finalPokemonList = pokedex.GetAll();
+        var finalPokemonList = pokedex.FindAllPokemon();
 
         //Assert
         finalPokemonList.Should().NotContain(pokemonOne);

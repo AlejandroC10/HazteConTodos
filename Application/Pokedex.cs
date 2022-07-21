@@ -28,7 +28,7 @@ public class Pokedex : IPokedex
         throw new ArgumentOutOfRangeException(nameof(id));
     }
 
-    public List<Pokemon> FindByType(string type)
+    public List<Pokemon> FindPokemonByType(string type)
     {
         var pokemonList = pokemonDb.ReadPokemon();
 
@@ -45,13 +45,13 @@ public class Pokedex : IPokedex
         return matchPokemon;
     }
 
-    public List<Pokemon> GetAll()
+    public List<Pokemon> FindAllPokemon()
     {
         var pokemonList = pokemonDb.ReadPokemon();
         return pokemonList;
     }
 
-    public void DeleteById(int id)
+    public void DeletePokemonById(int id)
     {
         pokemonDb.DeletePokemon(id);
     }

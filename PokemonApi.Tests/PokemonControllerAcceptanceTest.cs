@@ -105,13 +105,10 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         // Act
         var response = await client.DeleteAsync("/Pokemon/1");
         
-        
-    
         //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         
         var updatedPokemonList = pokemonDbTest.ReadPokemon();
         updatedPokemonList.Should().NotContain(fakePokemon);
-
     }
 }

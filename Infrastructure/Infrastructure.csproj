@@ -12,9 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="pokedexFalsa.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="pokedex.json" />
       <Content Include="pokedex.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
