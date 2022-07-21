@@ -55,4 +55,9 @@ public class Pokedex : IPokedex
     {
         pokemonDb.DeletePokemon(id);
     }
+
+    public void ModifyPokemonById(int id, string key, int change)
+    {
+        throw new NotImplementedException();
+    }
 }

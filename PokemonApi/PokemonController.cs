@@ -49,4 +49,13 @@ public class PokemonController : ControllerBase
         return Ok();
     }
     
+    [HttpPut]
+    [Route("{id}")]
+    public IActionResult Put(int id, string key, int change)
+    {
+        var pokedex = new Pokedex(pokemonDataBase);
+        pokedex.ModifyPokemonById(id, key, change);
+        
+        return Ok();
+    }
 }
