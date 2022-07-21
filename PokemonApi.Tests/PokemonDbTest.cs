@@ -13,7 +13,7 @@ public class PokemonDbTest : IPokemonDb
     public List<Pokemon> ReadPokemon()
     {
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.json"));
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.test.json"));
         var pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
         
         if (pokemonList == null)
@@ -36,6 +36,12 @@ public class PokemonDbTest : IPokemonDb
 
         var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(database);
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.WriteAllText(Path.Combine(path, "pokedex.json"), jsonContent);
+        File.WriteAllText(Path.Combine(path, "pokedex.test.json"), jsonContent);
+    }
+
+    public void CopyPokedexJson()
+    {
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        File.Copy(Path.Combine(path, "pokedex.json"), Path.Combine(path, "pokedex.test.json"), true);
     }
 }

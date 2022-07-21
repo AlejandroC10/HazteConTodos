@@ -15,10 +15,12 @@ namespace PokemonApiTests.Controllers;
 public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepApplicationFactory<Program>>
 {
     private readonly HttpClient client;
+    private IPokemonDb pokemonDbTest = new PokemonDbTest();
 
     public PokemonControllerAcceptanceTestShould(CustomWepApplicationFactory<Program> factory)
     {
         client = factory.CreateClient();
+        (pokemonDbTest as PokemonDbTest).CopyPokedexJson();
     }
     
     [Fact]
@@ -70,7 +72,7 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         var responseContent = await response.Content.ReadAsStringAsync();
         var foundedPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(responseContent);
 
-        foundedPokemon.Count.Should().Be(14);
+        foundedPokemon.Count.Should().Be(809);
     }
 
     [Fact]
@@ -100,8 +102,6 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         };
         var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
 
-        IPokemonDb pokemonDbTest = new PokemonDbTest();
-        
         // Act
         var response = await client.DeleteAsync("/Pokemon/1");
         
