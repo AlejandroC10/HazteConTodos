@@ -39,7 +39,7 @@ public class PokemonDbTest : IPokemonDb
         
         var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(db);
         
-        var path = Assembly.GetExecutingAssembly().Location;
+        var path = AppDomain.CurrentDomain.BaseDirectory;
         File.WriteAllText(Path.Combine(path,"pokedexFalsa.json"), jsonContent);
     }
 }
