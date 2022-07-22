@@ -446,8 +446,14 @@ public class PokedexShould
         act.Should().Throw<ArgumentNullException>().WithParameterName(nameof(id));
     }
     
-    [Fact]
-    public void UpdatePokemonHpWhenExists()
+    [Theory]
+    [InlineData("HP", 45)]
+    [InlineData("Attack", 49)]
+    [InlineData("Defense", 49)]
+    [InlineData("Sp. Attack", 65)]
+    [InlineData("Sp. Defense", 65)]
+    [InlineData("Speed", 45)]
+    public void UpdatePokemonStatsWhenExists(string keyToChange, int oldStatValue)
     {
         // Arrange
         #region pokemones
@@ -509,7 +515,7 @@ public class PokedexShould
         
         var pokemonDb = db.ReadPokemon();
         var id = 1;
-        var key = "HP";
+        var key = keyToChange;
         var change = 20;
 
         // Act
@@ -528,6 +534,6 @@ public class PokedexShould
         var pokemon = pokedex.FindPokemonById(1);
         
         // Assert
-        pokemon.Stats["HP"].Should().NotBe(45);
+        pokemon.Stats[key].Should().NotBe(oldStatValue);
     }
 }
