@@ -1,12 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Application.Interfaces;
 using Domain;
 using FluentAssertions;
 using Infrastructure;
 using NSubstitute;
-using NSubstitute.Core;
-using NSubstitute.ExceptionExtensions;
 using Xunit;
 
 namespace Application.Test;
@@ -425,27 +422,32 @@ public class PokedexShould
         };
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
+        
         db.ReadPokemon().Returns(pokemonList);
-        var pokemonDB = db.ReadPokemon();
+        
+        var pokemonDb = db.ReadPokemon();
         var id = 810;
+        var key = "HP";
+        var change = 20;
+        
         // Act
-        db.When(dataBase => dataBase.UpdatePokemon(id, "HP", 2)).Do(dataBaseFunction =>
+        db.When(dataBase => dataBase.UpdatePokemon(id, key, change)).Do(dataBaseFunction =>
         {
-            var database = pokemonDB;
+            var database = pokemonDb;
             var pokemonToUpdate = database.Find(pokemon => pokemon.Id == id);
             if (pokemonToUpdate == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
         });
-        Action act = () => pokedex.ModifyPokemonById(id,"HP",2);
+        Action act = () => pokedex.ModifyPokemonById(id, key, change);
         
         // Assert
         act.Should().Throw<ArgumentNullException>().WithParameterName(nameof(id));
     }
     
     [Fact]
-    public void UpdatePokemonWhenExists()
+    public void UpdatePokemonHpWhenExists()
     {
         // Arrange
         #region pokemones
@@ -502,11 +504,13 @@ public class PokedexShould
         };
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
+        
         db.ReadPokemon().Returns(pokemonList);
+        
+        var pokemonDb = db.ReadPokemon();
         var id = 1;
         var key = "HP";
         var change = 20;
-        var pokemonDb = db.ReadPokemon();
 
         // Act
         db.When(dataBase => dataBase.UpdatePokemon(id, key, change)).Do(dataBaseFunction =>
