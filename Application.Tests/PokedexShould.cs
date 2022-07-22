@@ -427,12 +427,21 @@ public class PokedexShould
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
         db.ReadPokemon().Returns(pokemonList);
-
+        var pokemonDB = db.ReadPokemon();
+        var id = 810;
         // Act
-        db.When(test => test.UpdatePokemon(810, "HP", 2)).Do(test => throw new ArgumentNullException());
-        Action act = () => pokedex.ModifyPokemonById(810,"HP",2);
+        db.When(dataBase => dataBase.UpdatePokemon(id, "HP", 2)).Do(dataBaseFunction =>
+        {
+            var database = pokemonDB;
+            var pokemonToUpdate = database.Find(pokemon => pokemon.Id == id);
+            if (pokemonToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+        });
+        Action act = () => pokedex.ModifyPokemonById(id,"HP",2);
         
         // Assert
-        act.Should().Throw<ArgumentNullException>();
+        act.Should().Throw<ArgumentNullException>().WithParameterName(nameof(id));
     }
 }
