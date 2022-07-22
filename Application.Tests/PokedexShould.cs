@@ -504,12 +504,26 @@ public class PokedexShould
         var pokedex = new Pokedex(db);
         db.ReadPokemon().Returns(pokemonList);
         var id = 1;
-        
+        var key = "HP";
+        var change = 20;
+        var pokemonDb = db.ReadPokemon();
+
         // Act
-        db.UpdatePokemon(id, "HP", 20);
+        db.When(dataBase => dataBase.UpdatePokemon(id, key, change)).Do(dataBaseFunction =>
+        {
+            var database = pokemonDb;
+            var pokemonToUpdate = database.Find(pokemon => pokemon.Id == id);
+            if (pokemonToUpdate == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            pokemonToUpdate.Stats[key] = change;
+        });
+        db.UpdatePokemon(id, key, change);
         var pokemon = pokedex.FindPokemonById(1);
         
         // Assert
-        pokemon.Stats.Should().NotBeSameAs(pokemonOne.Stats);
+        pokemon.Stats["HP"].Should().NotBe(45);
     }
 }

@@ -45,5 +45,7 @@ public class PokemonDb: IPokemonDb
         {
             throw new ArgumentNullException(nameof(id));
         }
+
+        pokemonToUpdate.Stats[key] = change;
     }
 }
