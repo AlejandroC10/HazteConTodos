@@ -35,5 +35,19 @@ public class PokemonDbShould
         
         finalList.Should().NotContain(pokemon);
     }
-
+    
+    [Fact]
+    public void UpdatePokemonById()
+    {
+        var pokemonDb = new PokemonDb();
+        var pokemonList = pokemonDb.ReadPokemon();
+        var ogPokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        
+        pokemonDb.UpdatePokemon(1,"HP",20);
+        
+        var finalList = pokemonDb.ReadPokemon();
+        var finalPokemon = finalList.Find(pokemon => pokemon.Id == 1);
+        
+        finalPokemon.Stats["HP"].Should().NotBe(ogPokemon.Stats["HP"]);
+    }
 }
