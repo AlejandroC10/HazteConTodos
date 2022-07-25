@@ -112,7 +112,7 @@ public class PokedexShould
     }
 
     [Fact]
-    public void UpdatePokemonStatsWhenExists()
+    public void UpdatePokemonById()
     {
         // Arrange
         var db = Substitute.For<IPokemonDb>();
