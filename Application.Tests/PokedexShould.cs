@@ -4,6 +4,7 @@ using Domain;
 using FluentAssertions;
 using Infrastructure;
 using NSubstitute;
+using NSubstitute.ReceivedExtensions;
 using Xunit;
 
 namespace Application.Test;
@@ -446,94 +447,21 @@ public class PokedexShould
         act.Should().Throw<ArgumentNullException>().WithParameterName(nameof(id));
     }
     
-    [Theory]
-    [InlineData("HP", 45)]
-    [InlineData("Attack", 49)]
-    [InlineData("Defense", 49)]
-    [InlineData("Sp. Attack", 65)]
-    [InlineData("Sp. Defense", 65)]
-    [InlineData("Speed", 45)]
-    public void UpdatePokemonStatsWhenExists(string keyToChange, int oldStatValue)
+    [Fact]
+    public void UpdatePokemonStatsWhenExists()
     {
         // Arrange
-        #region pokemones
-        var pokemonOne = new Pokemon(1,
-            new Dictionary<string, string>
-            {
-                {"english", "Bulbasaur"},
-                {"japanese", "フシギダネ"},
-                {"chinese", "妙蛙种子"},
-                {"french", "Bulbizarre"}
-            },
-            new List<string>
-            {
-                "Grass",
-                "Poison"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 45},
-                {"Attack", 49},
-                {"Defense", 49},
-                {"Sp. Attack", 65},
-                {"Sp. Defense", 65},
-                {"Speed", 45}
-            }
-        );
-        var pokemonTwo = new Pokemon(4,
-            new Dictionary<string, string>
-            {
-                {"english", "Charmander"},
-                {"japanese", "ヒトカゲ"},
-                {"chinese", "小火龙"},
-                {"french", "Salamèche"}
-            },
-            new List<string>
-            {
-                "Fire"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 39},
-                {"Attack", 52},
-                {"Defense", 43},
-                {"Sp. Attack", 60},
-                {"Sp. Defense", 50},
-                {"Speed", 65}
-            }
-        );
-        #endregion
-        var pokemonList = new List<Pokemon>()
-        {
-            pokemonOne,
-            pokemonTwo
-        };
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
-        
-        db.ReadPokemon().Returns(pokemonList);
-        
-        var pokemonDb = db.ReadPokemon();
+
         var id = 1;
-        var key = keyToChange;
+        var key = "HP";
         var change = 20;
 
         // Act
-        db.When(dataBase => dataBase.UpdatePokemon(id, key, change)).Do(dataBaseFunction =>
-        {
-            var database = pokemonDb;
-            var pokemonToUpdate = database.Find(pokemon => pokemon.Id == id);
-            if (pokemonToUpdate == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+        pokedex.ModifyPokemonById(id, key, change);
 
-            pokemonToUpdate.Stats[key] = change;
-        });
-        db.UpdatePokemon(id, key, change);
-        var pokemon = pokedex.FindPokemonById(1);
-        
         // Assert
-        pokemon.Stats[key].Should().NotBe(oldStatValue);
+        db.Received(1).UpdatePokemon(id, key, change);
     }
 }
