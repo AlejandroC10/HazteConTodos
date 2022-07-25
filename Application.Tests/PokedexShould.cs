@@ -22,11 +22,14 @@ public class PokedexShould
         pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
     }
         
-    [Fact]
-    public void ReturnPokemonById()
+    [Theory]
+    [InlineData(1)]
+    [InlineData(4)]
+    [InlineData(6)]
+    public void ReturnPokemonById(int id)
     {
         // Arrange
-        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == id);
 
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
@@ -34,17 +37,20 @@ public class PokedexShould
         db.ReadPokemon().Returns(pokemonList);
         
         //Act
-        var pokemon = pokedex.FindPokemonById(1);
+        var pokemon = pokedex.FindPokemonById(id);
         
         //Assert
         pokemon.Should().BeSameAs(fakePokemon);
         db.Received(1).ReadPokemon();
     }
 
-    [Fact]
-    public void ReturnPokemonListFromTypeGrass()
+    [Theory]
+    [InlineData("Grass")]
+    [InlineData("Ghost")]
+    [InlineData("Bug")]
+    public void ReturnPokemonListFromType(string type)
     {
-        var fakePokemon = pokemonList.FindAll(pokemon => pokemon.Type.Contains("Grass"));
+        var fakePokemon = pokemonList.FindAll(pokemon => pokemon.Type.Contains(type));
         
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
@@ -52,7 +58,7 @@ public class PokedexShould
         db.ReadPokemon().Returns(pokemonList);
         
         //Act
-        var pokemon = pokedex.FindPokemonByType("Grass");
+        var pokemon = pokedex.FindPokemonByType(type);
         
         //Assert
         pokemon.Should().BeEquivalentTo(fakePokemon);
