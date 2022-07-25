@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using Domain;
 using FluentAssertions;
 using Infrastructure;
@@ -11,38 +13,21 @@ namespace Application.Test;
 
 public class PokedexShould
 {
+    private List<Pokemon> pokemonList { get; set; }
+
+    public PokedexShould()
+    {
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var jsonContent = File.ReadAllText(Path.Combine(path, "testPokedex.json"));
+        pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
+    }
+        
     [Fact]
     public void ReturnPokemonById()
     {
         // Arrange
-        var fakeNames = new Dictionary<string, string>
-        {
-            {"english", "Bulbasaur"},
-            {"japanese", "フシギダネ"},
-            {"chinese", "妙蛙种子"},
-            {"french", "Bulbizarre"}
-        };
-        var fakeStats = new Dictionary<string, int>
-        {
-            {"HP", 45},
-            {"Attack", 49},
-            {"Defense", 49},
-            {"Sp. Attack", 65},
-            {"Sp. Defense", 65},
-            {"Speed", 45}
-        };
-        var fakeTypes = new List<string>
-        {
-            "Grass",
-            "Poison"
-        };
-        var fakePokemon = new Pokemon(1, fakeNames, fakeTypes, fakeStats);
-        
-        var pokemonList = new List<Pokemon>
-        {
-            fakePokemon
-        };
-        
+        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
 
@@ -59,64 +44,7 @@ public class PokedexShould
     [Fact]
     public void ReturnPokemonListFromTypeGrass()
     {
-        #region pokemones
-        var pokemonOne = new Pokemon(1,
-            new Dictionary<string, string>
-            {
-                {"english", "Ivysaur"},
-                {"japanese", "フシギソウ"},
-                {"chinese", "妙蛙草"},
-                {"french", "Herbizarre"}
-            },
-            new List<string>
-            {
-                "Grass",
-                "Poison"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 60},
-                {"Attack", 62},
-                {"Defense", 63},
-                {"Sp. Attack", 80},
-                {"Sp. Defense", 80},
-                {"Speed", 60}
-            }
-        );
-        var pokemonTwo = new Pokemon(4,
-            new Dictionary<string, string>
-            {
-                {"english", "Charmander"},
-                {"japanese", "ヒトカゲ"},
-                {"chinese", "小火龙"},
-                {"french", "Salamèche"}
-            },
-            new List<string>
-            {
-                "Fire"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 39},
-                {"Attack", 52 },
-                {"Defense", 43},
-                {"Sp. Attack", 60},
-                {"Sp. Defense", 50},
-                {"Speed", 65}
-            }
-        );
-        #endregion
-
-        var pokemonList = new List<Pokemon>()
-        {
-            pokemonOne,
-            pokemonTwo
-        };
-
-        var pokemonExpected = new List<Pokemon>()
-        {
-            pokemonOne
-        };
+        var fakePokemon = pokemonList.FindAll(pokemon => pokemon.Type.Contains("Grass"));
         
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
@@ -127,67 +55,13 @@ public class PokedexShould
         var pokemon = pokedex.FindPokemonByType("Grass");
         
         //Assert
-        pokemon.Should().BeEquivalentTo(pokemonExpected);
+        pokemon.Should().BeEquivalentTo(fakePokemon);
         db.Received(1).ReadPokemon();
     }
 
     [Fact]
     public void ReturnAllPokemon()
     {
-        #region pokemones
-        var pokemonOne = new Pokemon(1,
-            new Dictionary<string, string>
-            {
-                {"english", "Ivysaur"},
-                {"japanese", "フシギソウ"},
-                {"chinese", "妙蛙草"},
-                {"french", "Herbizarre"}
-            },
-            new List<string>
-            {
-                "Grass",
-                "Poison"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 60},
-                {"Attack", 62},
-                {"Defense", 63},
-                {"Sp. Attack", 80},
-                {"Sp. Defense", 80},
-                {"Speed", 60}
-            }
-        );
-        var pokemonTwo = new Pokemon(4,
-            new Dictionary<string, string>
-            {
-                {"english", "Charmander"},
-                {"japanese", "ヒトカゲ"},
-                {"chinese", "小火龙"},
-                {"french", "Salamèche"}
-            },
-            new List<string>
-            {
-                "Fire"
-            },
-            new Dictionary<string, int>
-            {
-                {"HP", 39},
-                {"Attack", 52 },
-                {"Defense", 43},
-                {"Sp. Attack", 60},
-                {"Sp. Defense", 50},
-                {"Speed", 65}
-            }
-        );
-        #endregion
-
-        var pokemonList = new List<Pokemon>()
-        {
-            pokemonOne,
-            pokemonTwo
-        };
-
         var db = Substitute.For<IPokemonDb>();
         var pokedex = new Pokedex(db);
 
