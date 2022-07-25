@@ -31,7 +31,6 @@ public class Pokedex : IPokedex
     public List<Pokemon> FindPokemonByType(string type)
     {
         var pokemonList = pokemonDb.ReadPokemon();
-
         var matchPokemon = new List<Pokemon>();
         
         foreach (var pokemon in pokemonList)
