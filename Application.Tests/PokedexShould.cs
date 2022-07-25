@@ -43,6 +43,20 @@ public class PokedexShould
         pokemon.Should().BeSameAs(fakePokemon);
         db.Received(1).ReadPokemon();
     }
+    
+    [Fact]
+    public void ThrowExceptionWhenIdIsOutOfBounds()
+    {
+        // Arrange
+        var db = Substitute.For<IPokemonDb>();
+        var pokedex = new Pokedex(db);
+
+        db.ReadPokemon().Returns(pokemonList);
+
+        //Assert
+        pokedex.Invoking(pokedex => pokedex.FindPokemonById(50)).Should().Throw<ArgumentOutOfRangeException>();
+        db.Received(1).ReadPokemon();
+    }
 
     [Theory]
     [InlineData("Grass")]
