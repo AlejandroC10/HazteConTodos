@@ -20,6 +20,7 @@ public class PokemonDbShould
     public void ReadPokemonReturnAPokemonList()
     {
         var pokemonDb = new PokemonDbTest();
+        
         var pokemonList = pokemonDb.ReadPokemon();
         
         var path = AppDomain.CurrentDomain.BaseDirectory;
@@ -36,8 +37,10 @@ public class PokemonDbShould
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         
         pokemonDb.DeletePokemon(1);
-        var finalList = pokemonDb.ReadPokemon();
         
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.test.json"));
+        var finalList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
         finalList.Should().NotContain(pokemon);
     }
     
@@ -50,9 +53,10 @@ public class PokemonDbShould
         
         pokemonDb.UpdatePokemon(1,"HP",20);
         
-        var finalList = pokemonDb.ReadPokemon();
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.test.json"));
+        var finalList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
         var finalPokemon = finalList.Find(pokemon => pokemon.Id == 1);
-        
         finalPokemon.Stats["HP"].Should().NotBe(ogPokemon.Stats["HP"]);
     }
 }
