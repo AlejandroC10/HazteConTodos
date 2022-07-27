@@ -47,8 +47,11 @@ public class PokemonDbTest : IPokemonDb
         {
             throw new ArgumentNullException(nameof(id));
         }
-        
         pokemonToUpdate.Stats[key] = change;
+        
+        var jsonContent = JsonSerializer.Serialize<List<Pokemon>>(database);
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        File.WriteAllText(Path.Combine(path, "pokedex.test.json"), jsonContent);
     }
 
     public void CopyPokedexJson()

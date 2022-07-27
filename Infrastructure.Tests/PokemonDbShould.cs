@@ -4,29 +4,34 @@ using System.IO;
 using System.Text.Json;
 using Domain;
 using FluentAssertions;
+using PokemonApiTests.Controllers;
 using Xunit;
 
 namespace Infrastructure.Tests;
 
 public class PokemonDbShould
 {
+    private IPokemonDb pokemonDbTest = new PokemonDbTest();
+    
+    public PokemonDbShould(){(pokemonDbTest as PokemonDbTest).CopyPokedexJson();}
+    
+    
     [Fact]
     public void ReadPokemonReturnAPokemonList()
     {
-        var pokemonDb = new PokemonDb();
+        var pokemonDb = new PokemonDbTest();
         var pokemonList = pokemonDb.ReadPokemon();
         
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.json"));
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.test.json"));
         var expectedList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
-
         pokemonList.Should().BeEquivalentTo(expectedList);
     }
     
     [Fact]
     public void DeletePokemonById()
     {
-        var pokemonDb = new PokemonDb();
+        var pokemonDb = new PokemonDbTest();
         var pokemonList = pokemonDb.ReadPokemon();
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         
@@ -39,7 +44,7 @@ public class PokemonDbShould
     [Fact]
     public void UpdatePokemonById()
     {
-        var pokemonDb = new PokemonDb();
+        var pokemonDb = new PokemonDbTest();
         var pokemonList = pokemonDb.ReadPokemon();
         var ogPokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         

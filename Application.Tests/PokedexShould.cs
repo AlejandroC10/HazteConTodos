@@ -6,7 +6,6 @@ using Domain;
 using FluentAssertions;
 using Infrastructure;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using Xunit;
 
 namespace Application.Test;
