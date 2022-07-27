@@ -3,7 +3,7 @@ using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PokemonApi;
+namespace PokemonApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

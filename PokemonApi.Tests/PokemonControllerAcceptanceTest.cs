@@ -19,8 +19,6 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
 {
     
     private List<Pokemon> pokemonList { get; set; }
-    
-    
     private readonly HttpClient client;
     private IPokemonDb pokemonDbTest = new PokemonDbTest();
 

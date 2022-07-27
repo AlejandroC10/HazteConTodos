@@ -14,7 +14,6 @@ public class PokemonDbShould
     
     public PokemonDbShould(){(pokemonDbTest as PokemonDbTest).CopyPokedexJson();}
     
-    
     [Fact]
     public void ReadPokemonReturnAPokemonList()
     {

@@ -15,10 +15,4 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="PokemonController.cs">
-        <DependentUpon>Program.cs</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
 </Project>
