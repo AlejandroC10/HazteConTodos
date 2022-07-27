@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,12 +10,17 @@ using Infrastructure;
 using Newtonsoft.Json;
 using Xunit;
 using VerifyXunit;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace PokemonApiTests.Controllers;
 
 [UsesVerify]
 public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepApplicationFactory<Program>>
 {
+    
+    private List<Pokemon> pokemonList { get; set; }
+    
+    
     private readonly HttpClient client;
     private IPokemonDb pokemonDbTest = new PokemonDbTest();
 
@@ -21,6 +28,9 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     {
         client = factory.CreateClient();
         (pokemonDbTest as PokemonDbTest).CopyPokedexJson();
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.test.json"));
+        pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
     }
     
     [Fact]
@@ -28,32 +38,10 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     {
         var response = await client.GetAsync("/Pokemon/1");
         var responseContent = await response.Content.ReadAsStringAsync();
-        var foundedPokemon = JsonConvert.DeserializeObject<Pokemon>(responseContent);
+        var foundPokemon = JsonConvert.DeserializeObject<Pokemon>(responseContent);
+        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
 
-        var fakeNames = new Dictionary<string, string>
-        {
-            {"english", "Bulbasaur"},
-            {"japanese", "フシギダネ"},
-            {"chinese", "妙蛙种子"},
-            {"french", "Bulbizarre"}
-        };
-        var fakeStats = new Dictionary<string, int>
-        {
-            {"HP", 45},
-            {"Attack", 49},
-            {"Defense", 49},
-            {"Sp. Attack", 65},
-            {"Sp. Defense", 65},
-            {"Speed", 45}
-        };
-        var fakeTypes = new List<string>
-        {
-            "Grass",
-            "Poison"
-        };
-        var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
-
-        foundedPokemon.Should().BeEquivalentTo(fakePokemon);
+        foundPokemon.Should().BeEquivalentTo(fakePokemon);
     }
     
     [Fact]
@@ -66,48 +54,21 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     }
 
     [Fact]
-    public async Task ShowPokemones()
+    public async Task ShowAllPokemon()
     {
         var response = await client.GetAsync("/Pokemon");
         var responseContent = await response.Content.ReadAsStringAsync();
-        var foundedPokemon = JsonConvert.DeserializeObject<List<Pokemon>>(responseContent);
-
-        foundedPokemon.Count.Should().Be(809);
+        await Verifier.VerifyJson(responseContent);
     }
 
     [Fact]
     public async Task DeletePokemon()
     {
-        // Arrange
-        var fakeNames = new Dictionary<string, string>
-        {
-            {"english", "Bulbasaur"},
-            {"japanese", "フシギダネ"},
-            {"chinese", "妙蛙种子"},
-            {"french", "Bulbizarre"}
-        };
-        var fakeStats = new Dictionary<string, int>
-        {
-            {"HP", 45},
-            {"Attack", 49},
-            {"Defense", 49},
-            {"Sp. Attack", 65},
-            {"Sp. Defense", 65},
-            {"Speed", 45}
-        };
-        var fakeTypes = new List<string>
-        {
-            "Grass",
-            "Poison"
-        };
-        var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
-
-        // Act
+        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        
         var response = await client.DeleteAsync("/Pokemon/1");
-        
-        //Assert
+
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
         var updatedPokemonList = pokemonDbTest.ReadPokemon();
         updatedPokemonList.Should().NotContain(fakePokemon);
     }
@@ -115,36 +76,11 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     [Fact]
     public async Task ModifyPokemon()
     {
-        // Arrange
-        var fakeNames = new Dictionary<string, string>
-        {
-            {"english", "Bulbasaur"},
-            {"japanese", "フシギダネ"},
-            {"chinese", "妙蛙种子"},
-            {"french", "Bulbizarre"}
-        };
-        var fakeStats = new Dictionary<string, int>
-        {
-            {"HP", 45},
-            {"Attack", 49},
-            {"Defense", 49},
-            {"Sp. Attack", 65},
-            {"Sp. Defense", 65},
-            {"Speed", 45}
-        };
-        var fakeTypes = new List<string>
-        {
-            "Grass",
-            "Poison"
-        };
-        var fakePokemon = new Pokemon(1,fakeNames,fakeTypes,fakeStats);
+        var fakePokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
 
-        // Act
         var response = await client.PutAsync("/Pokemon/1?key=HP&change=20", null);
-        
-        //Assert
+
         response.StatusCode.Should().Be(HttpStatusCode.OK);
-        
         var updatedPokemonList = pokemonDbTest.ReadPokemon();
         var finalPokemon = updatedPokemonList.Find(pokemon => pokemon.Id == 1);
         finalPokemon.Stats.Should().NotBeSameAs(fakePokemon.Stats);
