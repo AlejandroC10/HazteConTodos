@@ -4,7 +4,6 @@ using System.IO;
 using System.Text.Json;
 using Domain;
 using FluentAssertions;
-using PokemonApiTests.Controllers;
 using Xunit;
 
 namespace Infrastructure.Tests;

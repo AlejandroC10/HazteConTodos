@@ -1,6 +1,6 @@
 ﻿using Domain;
 
-namespace Application.Interfaces;
+namespace Application;
 
 public interface IPokedex
 {

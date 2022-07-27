@@ -3,11 +3,8 @@ using Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Writers;
-using PokemonApiTests.Controllers;
-using Xunit;
 
-namespace PokemonApiTests;
+namespace PokemonApi.Tests;
 
 public class CustomWepApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {

@@ -1,5 +1,4 @@
-﻿using Application.Interfaces;
-using Domain;
+﻿using Domain;
 using Infrastructure;
 
 namespace Application;

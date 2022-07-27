@@ -8,7 +8,7 @@ using Infrastructure;
 using NSubstitute;
 using Xunit;
 
-namespace Application.Test;
+namespace Application.Tests;
 
 public class PokedexShould
 {

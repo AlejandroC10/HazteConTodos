@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text.Json;
+﻿using System.Text.Json;
 using Domain;
-using Infrastructure;
 
-namespace PokemonApiTests.Controllers;
+namespace Infrastructure;
 
 public class PokemonDbTest : IPokemonDb
 {

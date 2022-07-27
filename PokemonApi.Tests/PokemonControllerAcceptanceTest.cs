@@ -12,7 +12,7 @@ using Xunit;
 using VerifyXunit;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace PokemonApiTests.Controllers;
+namespace PokemonApi.Tests;
 
 [UsesVerify]
 public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepApplicationFactory<Program>>
