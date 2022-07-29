@@ -83,4 +83,21 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         var finalPokemon = updatedPokemonList.Find(pokemon => pokemon.Id == 1);
         finalPokemon.Stats.Should().NotBeSameAs(fakePokemon.Stats);
     }
+    
+    [Fact]
+    public async Task AttackPokemon()
+    {
+        var pkOneFake = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pkTwoFake = pokemonList.Find(pokemon => pokemon.Id == 2);
+
+        var response = await client.GetAsync("/Pokemon/Combat?pkOne=1&pkTwo=2");
+        var responseContent = await response.Content.ReadAsStringAsync();
+        var combatResults = JsonConvert.DeserializeObject<CombatInfo>(responseContent);
+        var pkOne = combatResults.PokemonInfo[0];
+        var pkTwo = combatResults.PokemonInfo[1];
+        
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        pkTwoFake.Stats["Attack"].Should().BeGreaterOrEqualTo(pkOneFake.Stats["HP"] - pkOne.PokemonHp);
+        pkOneFake.Stats["Attack"].Should().BeGreaterOrEqualTo(pkTwoFake.Stats["HP"] - pkTwo.PokemonHp);
+    }
 }

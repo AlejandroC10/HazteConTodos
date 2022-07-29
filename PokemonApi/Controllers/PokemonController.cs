@@ -58,4 +58,10 @@ public class PokemonController : ControllerBase
         
         return Ok();
     }
+    
+    [HttpGet]
+    public IActionResult Get(int pkOne, int pkTwo)
+    {
+        return Ok();
+    }
 }
