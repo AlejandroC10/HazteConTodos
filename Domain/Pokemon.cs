@@ -26,6 +26,6 @@ public class Pokemon
 
   public void TakeDamage(int damage)
   {
-    
+    Stats["HP"] -= damage;
   }
 }

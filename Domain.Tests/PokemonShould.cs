@@ -1,7 +1,6 @@
-
-
 using System.Text.Json;
 using FluentAssertions;
+using Xunit;
 
 namespace Domain.Tests;
 
@@ -14,6 +13,7 @@ public class PokemonShould
         var jsonContent = File.ReadAllText(Path.Combine(path, "pokedex.json"));
         pokemonList = JsonSerializer.Deserialize<List<Pokemon>>(jsonContent);
     }
+    
     [Fact]
     public void ReceiveDamage()
     {
