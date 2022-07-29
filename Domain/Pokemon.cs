@@ -23,4 +23,9 @@ public class Pokemon
     Type = type;
     Stats = stats;
   }
+
+  public void TakeDamage(int damage)
+  {
+    
+  }
 }
