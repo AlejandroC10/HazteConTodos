@@ -89,14 +89,12 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     {
         var response = await client.GetAsync("/Pokemon/Combat?pkOne=1&pkTwo=2");
         var responseContent = await response.Content.ReadAsStringAsync();
-        var combatResults = JsonConvert.DeserializeObject<CombatInfo>(responseContent);
-        var pkOne = combatResults.PokemonInfo[0];
-        var pkTwo = combatResults.PokemonInfo[1];
+        var combatResults = JsonConvert.DeserializeObject<PokemonBattle>(responseContent);
+        var pkOne = combatResults.SelectedPokemon[0];
+        var pkTwo = combatResults.SelectedPokemon[1];
         
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        combatResults.CombatStatus.Should().Be($"{pkOne.PokemonName}: {pkOne.PokemonHp} HP | {pkTwo.PokemonName}: {pkTwo.PokemonHp} HP");
-
-
+        combatResults.CombatStatus.Should().Be($"{pkOne.Name["english"]}: {pkOne.Stats["HP"]} HP | {pkTwo.Name["english"]}: {pkTwo.Stats["HP"]} HP");
     }
 }
