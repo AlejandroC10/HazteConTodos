@@ -23,4 +23,15 @@ public class PokemonShould
 
         pokemon.Stats["HP"].Should().Be(40);
     }
+    
+    [Fact]
+    public void CalculateDamageNeutral()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        
+        var damage = pokemon.CalculateDamage(pokemon2.Type);
+
+        damage.Should().BeLessOrEqualTo(pokemon.Stats["Attack"]);
+    }
 }

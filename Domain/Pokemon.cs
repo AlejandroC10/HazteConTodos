@@ -28,4 +28,9 @@ public class Pokemon
   {
     Stats["HP"] -= damage;
   }
+
+  public int CalculateDamage(List<string> pokemon2Type)
+  {
+    throw new NotImplementedException();
+  }
 }
