@@ -40,6 +40,11 @@ public class Pokemon
     {
       return 52;
     }
+
+    if (pokemon2Type.Contains("Normal"))
+    {
+      return 0;
+    }
     return 37;
   }
 }
