@@ -45,4 +45,18 @@ public class PokemonBattleShould
         var expectedBattle = JsonSerializer.Deserialize<PokemonBattle>(jsonContent);
         pokemonBattle.Should().BeEquivalentTo(expectedBattle);
     }
+    
+    [Fact]
+    public void AttackWithPokemonOne()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        
+        var pokemonBattle = new PokemonBattle();
+        pokemonBattle.CreateBattle(pokemon, pokemon2);
+        pokemonBattle.Combat();
+        pokemonBattle.SaveBattle();
+
+        pokemonBattle.SelectedPokemon[1].Stats["HP"].Should().BeLessThan(pokemon2.Stats["HP"]);
+    }
 }

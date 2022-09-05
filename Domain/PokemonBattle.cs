@@ -27,4 +27,9 @@ public class PokemonBattle
         var path = AppDomain.CurrentDomain.BaseDirectory;
         File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
     }
+    
+    public void Combat()
+    {
+        throw new NotImplementedException();
+    }
 }
