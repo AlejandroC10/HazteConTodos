@@ -73,4 +73,17 @@ public class PokemonBattleShould
 
         pokemonBattle.SelectedPokemon[0].Stats["HP"].Should().BeLessThan(expectedHealth);
     }
+    
+    [Fact]
+    public void MakeACheck()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        
+        var pokemonBattle = new PokemonBattle();
+        pokemonBattle.CreateBattle(pokemon, pokemon2);
+        pokemonBattle.Combat();
+
+        pokemonBattle.CombatStatus.Should().Be($"{pokemon.Name["english"]}: {pokemon.Stats["HP"]} HP | {pokemon2.Name["english"]}: {pokemon2.Stats["HP"]} HP");
+    }
 }

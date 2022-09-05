@@ -34,6 +34,7 @@ public class PokemonBattle
         var pokemonTwo = SelectedPokemon[1];
 
         Attack(pokemonOne,pokemonTwo);
+        
         Attack(pokemonTwo,pokemonOne);
     }
 
