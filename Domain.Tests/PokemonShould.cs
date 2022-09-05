@@ -61,7 +61,7 @@ public class PokemonShould
     [Fact]
     public void CalculateDamageImmune()
     {
-        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 592);
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 607);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 263);
         
         var damage = pokemon.CalculateDamage(pokemon2.Type);

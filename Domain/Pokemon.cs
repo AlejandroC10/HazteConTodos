@@ -31,20 +31,7 @@ public class Pokemon
 
   public int CalculateDamage(List<string> pokemon2Type)
   {
-    if (pokemon2Type.Contains("Fire"))
-    {
-      return 22;
-    }
-
-    if (pokemon2Type.Contains("Water"))
-    {
-      return 52;
-    }
-
-    if (pokemon2Type.Contains("Normal"))
-    {
-      return 0;
-    }
-    return 37;
+    var damageVariator = PokemonType.GetTypeEffectiveness(Type[0], pokemon2Type[0]);
+    return (int)(Stats["Attack"] * damageVariator);
   }
 }
