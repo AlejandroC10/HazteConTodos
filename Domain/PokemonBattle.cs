@@ -30,6 +30,10 @@ public class PokemonBattle
     
     public void Combat()
     {
-        throw new NotImplementedException();
+        var pokemonOne = SelectedPokemon[0];
+        var pokemonTwo = SelectedPokemon[1];
+
+        var pokemonOneDamage = pokemonOne.CalculateDamage(pokemonTwo.Type);
+        pokemonTwo.TakeDamage(pokemonOneDamage);
     }
 }
