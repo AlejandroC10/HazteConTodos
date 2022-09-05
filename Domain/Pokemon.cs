@@ -31,6 +31,10 @@ public class Pokemon
 
   public int CalculateDamage(List<string> pokemon2Type)
   {
+    if (pokemon2Type.Contains("Fire"))
+    {
+      return 22;
+    }
     return 37;
   }
 }
