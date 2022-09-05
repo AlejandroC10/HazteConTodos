@@ -6,9 +6,13 @@ public class PokemonBattle
     public string? CombatWinner { get; set; }
     public string CombatStatus { get; set; }
 
-    public PokemonBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
+    public PokemonBattle()
     {
-        SelectedPokemon = new List<Pokemon> { pokemonOne, pokemonTwo };
-        CombatStatus = $"{SelectedPokemon[0].Name["english"]}: {SelectedPokemon[0].Stats["HP"]} HP | {SelectedPokemon[1].Name["english"]}: {SelectedPokemon[1].Stats["HP"]} HP";
+        CombatStatus = "";
+    }
+
+    public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
+    {
+        throw new NotImplementedException();
     }
 }
