@@ -13,6 +13,6 @@ public class PokemonBattle
 
     public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
     {
-        throw new NotImplementedException();
+        SelectedPokemon = new List<Pokemon> { pokemonOne, pokemonTwo };
     }
 }
