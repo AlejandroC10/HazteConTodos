@@ -57,4 +57,15 @@ public class PokemonShould
         damage.Should().BeLessOrEqualTo(pokemon.Stats["Attack"] * 2);
         (damage % 2).Should().Be(0);
     }
+    
+    [Fact]
+    public void CalculateDamageImmune()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 592);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 263);
+        
+        var damage = pokemon.CalculateDamage(pokemon2.Type);
+
+        damage.Should().Be(0);
+    }
 }
