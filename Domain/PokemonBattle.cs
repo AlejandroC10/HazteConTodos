@@ -41,6 +41,10 @@ public class PokemonBattle
         else
         {
             Attack(pokemonTwo,pokemonOne);
+            if (pokemonOne.Stats["HP"] <= 0)
+            {
+                CombatWinner = $"{pokemonTwo.Name["english"]}";
+            }
         }
         if (CombatWinner is null)
         {

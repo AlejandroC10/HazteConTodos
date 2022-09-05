@@ -92,7 +92,7 @@ public class PokemonBattleShould
     {
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
-        pokemon2.Stats["HP"] = 1;
+        pokemon2.Stats["HP"] = 0;
         
         var pokemonBattle = new PokemonBattle();
         pokemonBattle.CreateBattle(pokemon, pokemon2);
@@ -107,7 +107,7 @@ public class PokemonBattleShould
     {
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
-        pokemon.Stats["HP"] = 1;
+        pokemon.Stats["HP"] = 0;
         
         var pokemonBattle = new PokemonBattle();
         pokemonBattle.CreateBattle(pokemon, pokemon2);
