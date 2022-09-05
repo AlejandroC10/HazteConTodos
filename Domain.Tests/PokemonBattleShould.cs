@@ -86,4 +86,19 @@ public class PokemonBattleShould
 
         pokemonBattle.CombatStatus.Should().Be($"{pokemon.Name["english"]}: {pokemon.Stats["HP"]} HP | {pokemon2.Name["english"]}: {pokemon2.Stats["HP"]} HP");
     }
+    
+    [Fact]
+    public void LetPokemonOneWinWhenPokemonTwoDies()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        pokemon2.Stats["HP"] = 1;
+        
+        var pokemonBattle = new PokemonBattle();
+        pokemonBattle.CreateBattle(pokemon, pokemon2);
+        pokemonBattle.Combat();
+
+        pokemonBattle.CombatStatus.Should().Be($"{pokemon.Name["english"]} is the WINNER");
+        pokemonBattle.CombatWinner.Should().Be($"{pokemon.Name["english"]}");
+    }
 }
