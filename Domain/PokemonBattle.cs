@@ -34,17 +34,12 @@ public class PokemonBattle
         var pokemonTwo = SelectedPokemon[1];
 
         Attack(pokemonOne,pokemonTwo);
-        if (pokemonTwo.Stats["HP"] <= 0)
-        {
-            CombatWinner = $"{pokemonOne.Name["english"]}";
-        }
-        else
+        CheckWinnner(pokemonOne, pokemonTwo);
+        
+        if (CombatWinner is null)
         {
             Attack(pokemonTwo,pokemonOne);
-            if (pokemonOne.Stats["HP"] <= 0)
-            {
-                CombatWinner = $"{pokemonTwo.Name["english"]}";
-            }
+            CheckWinnner(pokemonTwo, pokemonOne);
         }
         if (CombatWinner is null)
         {
@@ -57,5 +52,13 @@ public class PokemonBattle
     {
         var attackerDamage = attacker.CalculateDamage(defender.Type);
         defender.TakeDamage(attackerDamage);
+    }
+    
+    public void CheckWinnner(Pokemon attacker, Pokemon defender)
+    {
+        if (defender.Stats["HP"] <= 0)
+        {
+            CombatWinner = $"{attacker.Name["english"]}";
+        }
     }
 }
