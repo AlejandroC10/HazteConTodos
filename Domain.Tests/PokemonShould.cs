@@ -34,4 +34,15 @@ public class PokemonShould
 
         damage.Should().BeLessOrEqualTo(pokemon.Stats["Attack"]);
     }
+    
+    [Fact]
+    public void CalculateDamageNotEffective()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 4);
+        
+        var damage = pokemon.CalculateDamage(pokemon2.Type);
+
+        damage.Should().BeLessOrEqualTo(pokemon.Stats["Attack"] / 2);
+    }
 }
