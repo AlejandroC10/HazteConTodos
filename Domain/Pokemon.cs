@@ -35,6 +35,11 @@ public class Pokemon
     {
       return 22;
     }
+
+    if (pokemon2Type.Contains("Water"))
+    {
+      return 52;
+    }
     return 37;
   }
 }
