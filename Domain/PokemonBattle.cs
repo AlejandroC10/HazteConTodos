@@ -35,5 +35,8 @@ public class PokemonBattle
 
         var pokemonOneDamage = pokemonOne.CalculateDamage(pokemonTwo.Type);
         pokemonTwo.TakeDamage(pokemonOneDamage);
+        
+        var pokemonTwoDamage = pokemonTwo.CalculateDamage(pokemonOne.Type);
+        pokemonOne.TakeDamage(pokemonTwoDamage);
     }
 }
