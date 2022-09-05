@@ -15,4 +15,9 @@ public class PokemonBattle
     {
         SelectedPokemon = new List<Pokemon> { pokemonOne, pokemonTwo };
     }
+    
+    public void SaveBattle()
+    {
+        throw new NotImplementedException();
+    }
 }
