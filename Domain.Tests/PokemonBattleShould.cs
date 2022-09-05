@@ -41,7 +41,7 @@ public class PokemonBattleShould
         pokemonBattle.SaveBattle();
 
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        var jsonContent = File.ReadAllText(Path.Combine(path, "1vs2.json"));
+        var jsonContent = File.ReadAllText(Path.Combine(path, $"{pokemon.Id}vs{pokemon2.Id}.json"));
         var expectedBattle = JsonSerializer.Deserialize<PokemonBattle>(jsonContent);
         pokemonBattle.Should().BeEquivalentTo(expectedBattle);
     }

@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace Domain;
 
 public class PokemonBattle
@@ -18,6 +20,11 @@ public class PokemonBattle
     
     public void SaveBattle()
     {
-        throw new NotImplementedException();
+        var pokemonOne = SelectedPokemon[0].Id;
+        var pokemonTwo = SelectedPokemon[1].Id;
+        
+        var jsonContent = JsonSerializer.Serialize<PokemonBattle>(this);
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
     }
 }
