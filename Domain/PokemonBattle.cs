@@ -33,10 +33,13 @@ public class PokemonBattle
         var pokemonOne = SelectedPokemon[0];
         var pokemonTwo = SelectedPokemon[1];
 
-        var pokemonOneDamage = pokemonOne.CalculateDamage(pokemonTwo.Type);
-        pokemonTwo.TakeDamage(pokemonOneDamage);
-        
-        var pokemonTwoDamage = pokemonTwo.CalculateDamage(pokemonOne.Type);
-        pokemonOne.TakeDamage(pokemonTwoDamage);
+        Attack(pokemonOne,pokemonTwo);
+        Attack(pokemonTwo,pokemonOne);
+    }
+
+    public void Attack(Pokemon attacker, Pokemon defender)
+    {
+        var attackerDamage = attacker.CalculateDamage(defender.Type);
+        defender.TakeDamage(attackerDamage);
     }
 }
