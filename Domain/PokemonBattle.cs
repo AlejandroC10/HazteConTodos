@@ -36,6 +36,8 @@ public class PokemonBattle
         Attack(pokemonOne,pokemonTwo);
         
         Attack(pokemonTwo,pokemonOne);
+
+        CombatStatus = $"{pokemonOne.Name["english"]}: {pokemonOne.Stats["HP"]} HP | {pokemonTwo.Name["english"]}: {pokemonTwo.Stats["HP"]} HP";
     }
 
     public void Attack(Pokemon attacker, Pokemon defender)
