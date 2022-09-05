@@ -56,7 +56,6 @@ public class PokemonBattleShould
         var pokemonBattle = new PokemonBattle();
         pokemonBattle.CreateBattle(pokemon, pokemon2);
         pokemonBattle.Combat();
-        pokemonBattle.SaveBattle();
 
         pokemonBattle.SelectedPokemon[1].Stats["HP"].Should().BeLessThan(expectedHealth);
     }
