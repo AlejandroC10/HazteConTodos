@@ -15,7 +15,21 @@ public class PokemonBattle
 
     public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
     {
-        SelectedPokemon = new List<Pokemon> { pokemonOne, pokemonTwo };
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var filePath = Path.Combine(path, $"{pokemonOne.Id}vs{pokemonTwo.Id}.json");
+        
+        if (File.Exists(filePath))
+        {
+            var jsonContent = File.ReadAllText(filePath);
+            var foundBattle = JsonSerializer.Deserialize<PokemonBattle>(jsonContent);
+            SelectedPokemon = foundBattle!.SelectedPokemon;
+            CombatStatus = foundBattle!.CombatStatus;
+            CombatWinner = foundBattle!.CombatWinner;
+        }
+        else
+        {
+            SelectedPokemon = new List<Pokemon> { pokemonOne, pokemonTwo };   
+        }
     }
     
     public void SaveBattle()
