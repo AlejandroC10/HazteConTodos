@@ -30,6 +30,11 @@ public class PokemonBattle
     
     public void DeleteBattle()
     {
+        var pokemonOne = SelectedPokemon[0].Id;
+        var pokemonTwo = SelectedPokemon[1].Id;
+        
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        File.Delete(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"));
     }
     
     public void Combat()
