@@ -116,4 +116,24 @@ public class PokemonBattleShould
         pokemonBattle.CombatStatus.Should().Be($"{pokemon2.Name["english"]} is the WINNER");
         pokemonBattle.CombatWinner.Should().Be($"{pokemon2.Name["english"]}");
     }
+    
+    [Fact]
+    public void LoadBattleFromJson()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        
+        var initialPokemonBattle = new PokemonBattle();
+        initialPokemonBattle.CreateBattle(pokemon, pokemon2);
+        initialPokemonBattle.Combat();
+        initialPokemonBattle.SaveBattle(); 
+        
+        var pokemonBattle = new PokemonBattle();
+        pokemonBattle.CreateBattle(pokemon, pokemon2);
+
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var jsonContent = File.ReadAllText(Path.Combine(path, $"{pokemon.Id}vs{pokemon2.Id}.json"));
+        var expectedBattle = JsonSerializer.Deserialize<PokemonBattle>(jsonContent);
+        pokemonBattle.Should().BeEquivalentTo(expectedBattle);
+    }
 }
