@@ -27,6 +27,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="pokedex.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <Content Include="testPokedex.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>

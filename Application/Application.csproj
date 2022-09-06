@@ -15,4 +15,10 @@
       <PackageReference Include="NSubstitute" Version="4.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="pokedex.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>
