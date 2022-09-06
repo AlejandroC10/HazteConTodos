@@ -60,8 +60,27 @@ public class PokemonController : ControllerBase
     }
     
     [HttpGet]
+    [Route("combat")]
     public IActionResult Get(int pkOne, int pkTwo)
     {
-        return Ok();
+        var pokedex = new Pokedex(pokemonDataBase);
+
+        var pokemonOne = pokedex.FindPokemonById(pkOne);
+        var pokemonTwo = pokedex.FindPokemonById(pkTwo);
+
+        var pokemonBattle = new PokemonBattle();
+        pokemonBattle.CreateBattle(pokemonOne, pokemonTwo);
+        pokemonBattle.Combat();
+
+        if (pokemonBattle.CombatWinner != null)
+        {
+            pokemonBattle.DeleteBattle();    
+        }
+        else
+        {
+            pokemonBattle.SaveBattle();
+        }
+        
+        return Ok(pokemonBattle.CombatStatus);
     }
 }

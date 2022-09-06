@@ -85,16 +85,13 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     }
     
     [Fact]
-    public async Task AttackPokemon()
+    public async Task PokemonBattle()
     {
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        File.Delete(Path.Combine(path, "1vs2.json"));
         var response = await client.GetAsync("/Pokemon/Combat?pkOne=1&pkTwo=2");
         var responseContent = await response.Content.ReadAsStringAsync();
-        var combatResults = JsonConvert.DeserializeObject<PokemonBattle>(responseContent);
-        var pkOne = combatResults.SelectedPokemon[0];
-        var pkTwo = combatResults.SelectedPokemon[1];
         
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        combatResults.CombatStatus.Should().Be($"{pkOne.Name["english"]}: {pkOne.Stats["HP"]} HP | {pkTwo.Name["english"]}: {pkTwo.Stats["HP"]} HP");
+        responseContent.Should().Match($"Bulbasaur: * HP | Ivysaur: * HP");
     }
 }
