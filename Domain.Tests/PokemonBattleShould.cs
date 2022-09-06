@@ -44,6 +44,7 @@ public class PokemonBattleShould
         var jsonContent = File.ReadAllText(Path.Combine(path, $"{pokemon.Id}vs{pokemon2.Id}.json"));
         var expectedBattle = JsonSerializer.Deserialize<PokemonBattle>(jsonContent);
         pokemonBattle.Should().BeEquivalentTo(expectedBattle);
+        pokemonBattle.DeleteBattle();
     }
     
     [Fact]
