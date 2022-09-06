@@ -76,7 +76,7 @@ public class PokemonBattleShould
     }
     
     [Fact]
-    public void MakeACheck()
+    public void UpdateCombatStatusAfterEachTurn()
     {
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
@@ -134,7 +134,7 @@ public class PokemonBattleShould
     }
     
     [Fact]
-    public void LoadBattleFromJson()
+    public void LoadBattleFromJsonIfAlreadyExists()
     {
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);

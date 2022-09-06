@@ -64,11 +64,15 @@ public class PokemonBattle
             Attack(pokemonTwo,pokemonOne);
             CheckWinnner(pokemonTwo, pokemonOne);
         }
+        
         if (CombatWinner is null)
         {
             CombatStatus = $"{pokemonOne.Name["english"]}: {pokemonOne.Stats["HP"]} HP | {pokemonTwo.Name["english"]}: {pokemonTwo.Stats["HP"]} HP";
-        }else
+        }
+        else
+        {
             CombatStatus = $"{CombatWinner} is the WINNER";
+        }
     }
 
     public void Attack(Pokemon attacker, Pokemon defender)
