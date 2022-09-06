@@ -28,6 +28,10 @@ public class PokemonBattle
         File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
     }
     
+    public void DeleteBattle()
+    {
+    }
+    
     public void Combat()
     {
         var pokemonOne = SelectedPokemon[0];
