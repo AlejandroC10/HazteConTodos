@@ -1,4 +1,5 @@
 using System.Linq;
+using Domain;
 using Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -15,6 +16,10 @@ public class CustomWepApplicationFactory<TStartup> : WebApplicationFactory<TStar
                         var pokemonDb = services.SingleOrDefault(serviceDescriptor => serviceDescriptor.ServiceType == typeof(IPokemonDb));
                         services.Remove(pokemonDb);
                         services.AddScoped<IPokemonDb, PokemonDbTest>();
+                        
+                        var pokemonBattle = services.SingleOrDefault(serviceDescriptor => serviceDescriptor.ServiceType == typeof(IPokemonBattle));
+                        services.Remove(pokemonBattle);
+                        services.AddScoped<IPokemonBattle, PokemonBattleTest>();
                 });
         }
 }

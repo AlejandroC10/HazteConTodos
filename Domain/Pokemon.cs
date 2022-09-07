@@ -29,9 +29,9 @@ public class Pokemon
     Stats["HP"] -= damage;
   }
 
-  public int CalculateDamage(List<string> pokemon2Type)
+  public int CalculateDamage(List<string> pokemon2Type, int damage)
   {
     var damageVariator = PokemonType.GetTypeEffectiveness(Type[0], pokemon2Type[0]);
-    return (int)(new Random().Next(1, Stats["Attack"] + 1) * damageVariator);
+    return (int)(damage * damageVariator);
   }
 }

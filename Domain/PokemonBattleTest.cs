@@ -2,13 +2,13 @@ using System.Text.Json;
 
 namespace Domain;
 
-public class PokemonBattle: IPokemonBattle
+public class PokemonBattleTest: IPokemonBattle
 {
     public List<Pokemon> SelectedPokemon { get; set; }
     public string? CombatWinner { get; set; }
     public string CombatStatus { get; set; }
 
-    public PokemonBattle()
+    public PokemonBattleTest()
     {
         CombatStatus = "";
     }
@@ -16,7 +16,7 @@ public class PokemonBattle: IPokemonBattle
     public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
     {
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        var filePath = Path.Combine(path, $"{pokemonOne.Id}vs{pokemonTwo.Id}.json");
+        var filePath = Path.Combine(path, $"{pokemonOne.Id}vs{pokemonTwo.Id}.test.json");
         
         if (File.Exists(filePath))
         {
@@ -37,9 +37,9 @@ public class PokemonBattle: IPokemonBattle
         var pokemonOne = SelectedPokemon[0].Id;
         var pokemonTwo = SelectedPokemon[1].Id;
         
-        var jsonContent = JsonSerializer.Serialize<PokemonBattle>(this);
+        var jsonContent = JsonSerializer.Serialize<PokemonBattleTest>(this);
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
+        File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.test.json"), jsonContent);
     }
     
     public void DeleteBattle()
@@ -48,7 +48,7 @@ public class PokemonBattle: IPokemonBattle
         var pokemonTwo = SelectedPokemon[1].Id;
         
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.Delete(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"));
+        File.Delete(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.test.json"));
     }
     
     public void Combat()

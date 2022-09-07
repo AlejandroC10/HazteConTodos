@@ -1,3 +1,4 @@
+using Domain;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPokemonDb, PokemonDb>();
+builder.Services.AddScoped<IPokemonBattle, PokemonBattle>();
 
 var app = builder.Build();
 
