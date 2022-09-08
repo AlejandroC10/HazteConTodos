@@ -26,6 +26,16 @@ public class PokemonBattleDb: IPokemonBattleDb
     
     public void LoadBattle(PokemonBattle pokemonBattle)
     {
-        throw new NotImplementedException();
+        var pokemonOne = pokemonBattle.PokemonBattleInfo.SelectedPokemon[0].Id;
+        var pokemonTwo = pokemonBattle.PokemonBattleInfo.SelectedPokemon[1].Id;
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        var filePath = Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json");
+        
+        if (File.Exists(filePath))
+        {
+            var jsonContent = File.ReadAllText(filePath);
+            var foundBattle = JsonSerializer.Deserialize<PokemonBattleInfo>(jsonContent);
+            pokemonBattle.PokemonBattleInfo = foundBattle!;
+        }
     }
 }
