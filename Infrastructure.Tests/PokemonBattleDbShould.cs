@@ -36,4 +36,20 @@ public class PokemonBattleDbShould
         var expectedBattle = JsonSerializer.Deserialize<PokemonBattleInfo>(jsonContent);
         pokemonBattle.PokemonBattleInfo.Should().BeEquivalentTo(expectedBattle);
     }
+    
+    [Fact]
+    public void DeleteBattle()
+    {
+        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
+        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
+        var pokemonAttacker = Substitute.For<IPokemonAttacker>();
+        var pokemonBattle = new PokemonBattle(pokemonAttacker);
+        var pokemonBattleDb = new PokemonBattleDb();
+        
+        pokemonBattle.CreateBattle(pokemon, pokemon2);
+        pokemonBattleDb.DeleteBattle(pokemonBattle);
+        var path = AppDomain.CurrentDomain.BaseDirectory;
+        
+        File.Exists(Path.Combine(path, $"{pokemon.Id}vs{pokemon2.Id}.json")).Should().BeFalse();
+    }
 }

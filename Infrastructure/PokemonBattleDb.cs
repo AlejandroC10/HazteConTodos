@@ -14,4 +14,9 @@ public class PokemonBattleDb: IPokemonBattleDb
         var path = AppDomain.CurrentDomain.BaseDirectory;
         File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
     }
+
+    public void DeleteBattle(PokemonBattle pokemonBattle)
+    {
+        
+    }
 }
