@@ -54,7 +54,7 @@ public class PokemonBattleDbShould
     }
     
     [Fact]
-    public void LoadBattle()
+    public void LoadBattleIfExists()
     {
         var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
         var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
