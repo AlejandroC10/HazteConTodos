@@ -32,25 +32,7 @@ public class PokemonBattleShould
 
         pokemonBattle.PokemonBattleInfo.SelectedPokemon.Should().BeEquivalentTo(expectedList);
     }
-    
-    [Fact]
-    public void SaveBattleToJson()
-    {
-        var pokemon = pokemonList.Find(pokemon => pokemon.Id == 1);
-        var pokemon2 = pokemonList.Find(pokemon => pokemon.Id == 2);
-        var pokemonAttacker = Substitute.For<IPokemonAttacker>();
-        var pokemonBattle = new PokemonBattle(pokemonAttacker);
-        
-        pokemonBattle.CreateBattle(pokemon, pokemon2);
-        pokemonBattle.SaveBattle();
 
-        var path = AppDomain.CurrentDomain.BaseDirectory;
-        var jsonContent = File.ReadAllText(Path.Combine(path, $"{pokemon.Id}vs{pokemon2.Id}.json"));
-        var expectedBattle = JsonSerializer.Deserialize<PokemonBattleInfo>(jsonContent);
-        pokemonBattle.PokemonBattleInfo.Should().BeEquivalentTo(expectedBattle);
-        pokemonBattle.DeleteBattle();
-    }
-    
     [Fact]
     public void AttackWithPokemonOne()
     {
@@ -78,7 +60,7 @@ public class PokemonBattleShould
         pokemonBattle.CreateBattle(pokemon, pokemon2);
         pokemonBattle.Combat();
 
-        pokemonBattle.PokemonBattleInfo.SelectedPokemon[0].Stats["HP"].Should().Be(40);;
+        pokemonBattle.PokemonBattleInfo.SelectedPokemon[0].Stats["HP"].Should().Be(40);
     }
     
     [Fact]
