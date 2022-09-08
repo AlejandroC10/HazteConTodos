@@ -10,14 +10,14 @@ namespace PokemonApi.Controllers;
 public class PokemonController : ControllerBase
 {
     private IPokemonDb pokemonDataBase;
+    private IPokemonBattleDb pokemonBattleDataBase;
     private IPokemonAttacker pokemonAttacker;
-    private IPokemonBattle pokemonBattle;
 
-    public PokemonController(IPokemonDb pokemonDb, IPokemonAttacker pokemonAtt, IPokemonBattle pokemonBttl)
+    public PokemonController(IPokemonDb pokemonDb, IPokemonBattleDb pokemonBattleDb, IPokemonAttacker pokemonAtk)
     {
         pokemonDataBase = pokemonDb;
-        pokemonAttacker = pokemonAtt;
-        pokemonBattle = pokemonBttl;
+        pokemonBattleDataBase = pokemonBattleDb;
+        pokemonAttacker = pokemonAtk;
     }
 
     [HttpGet]
@@ -71,17 +71,19 @@ public class PokemonController : ControllerBase
 
         var pokemonOne = pokedex.FindPokemonById(pkOne);
         var pokemonTwo = pokedex.FindPokemonById(pkTwo);
-        
+
+        var pokemonBattle = new PokemonBattle(pokemonAttacker);
         pokemonBattle.CreateBattle(pokemonOne, pokemonTwo);
+        pokemonBattleDataBase.LoadBattle(pokemonBattle);
         pokemonBattle.Combat();
         
         if (pokemonBattle.PokemonBattleInfo.CombatWinner != null)
         {
-            pokemonBattle.DeleteBattle();    
+            pokemonBattleDataBase.DeleteBattle(pokemonBattle);    
         }
         else
         {
-            pokemonBattle.SaveBattle();
+            pokemonBattleDataBase.SaveBattle(pokemonBattle);
         }
         
         return Ok(pokemonBattle.PokemonBattleInfo.CombatStatus);

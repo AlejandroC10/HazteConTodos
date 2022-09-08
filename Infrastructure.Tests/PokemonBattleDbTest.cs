@@ -1,9 +1,11 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.IO;
+using System.Text.Json;
 using Domain;
 
-namespace Infrastructure;
+namespace Infrastructure.Tests;
 
-public class PokemonBattleDb: IPokemonBattleDb
+public class PokemonBattleDbTest: IPokemonBattleDb
 {
     public void SaveBattle(IPokemonBattle pokemonBattle)
     {
@@ -12,7 +14,7 @@ public class PokemonBattleDb: IPokemonBattleDb
         
         var jsonContent = JsonSerializer.Serialize<PokemonBattleInfo>(pokemonBattle.PokemonBattleInfo);
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"), jsonContent);
+        File.WriteAllText(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.test.json"), jsonContent);
     }
 
     public void DeleteBattle(IPokemonBattle pokemonBattle)
@@ -21,21 +23,19 @@ public class PokemonBattleDb: IPokemonBattleDb
         var pokemonTwo = pokemonBattle.PokemonBattleInfo.SelectedPokemon[1].Id;
         
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        File.Delete(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json"));
+        File.Delete(Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.test.json"));
     }
-
+    
     public void LoadBattle(IPokemonBattle pokemonBattle)
     {
         var pokemonOne = pokemonBattle.PokemonBattleInfo.SelectedPokemon[0].Id;
         var pokemonTwo = pokemonBattle.PokemonBattleInfo.SelectedPokemon[1].Id;
         var path = AppDomain.CurrentDomain.BaseDirectory;
-        var filePath = Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.json");
-    
+        var filePath = Path.Combine(path, $"{pokemonOne}vs{pokemonTwo}.test.json");
+        
         if (File.Exists(filePath))
         {
-            var jsonContent = File.ReadAllText(filePath);
-            var foundBattle = JsonSerializer.Deserialize<PokemonBattleInfo>(jsonContent);
-            pokemonBattle.PokemonBattleInfo = foundBattle!;
+            DeleteBattle(pokemonBattle);
         }
     }
 }

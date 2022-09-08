@@ -10,15 +10,7 @@ public interface IPokemonBattle
     public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
     {
     }
-    
-    public void SaveBattle()
-    {
-    }
-    
-    public void DeleteBattle()
-    {
-    }
-    
+
     public void Combat()
     {
     }
@@ -27,7 +19,7 @@ public interface IPokemonBattle
     {
     }
     
-    public void CheckWinnner(Pokemon attacker, Pokemon defender)
+    public void CheckWinner(Pokemon attacker, Pokemon defender)
     {
     }
 }

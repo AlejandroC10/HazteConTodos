@@ -4,6 +4,7 @@ namespace Infrastructure;
 
 public interface IPokemonBattleDb
 {
-    public void SaveBattle(PokemonBattle pokemonBattle);
-    public void DeleteBattle(PokemonBattle pokemonBattle);
+    public void SaveBattle(IPokemonBattle pokemonBattle);
+    public void DeleteBattle(IPokemonBattle pokemonBattle);
+    public void LoadBattle(IPokemonBattle pokemonBattle);
 }
