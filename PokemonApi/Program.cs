@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPokemonDb, PokemonDb>();
 builder.Services.AddScoped<IPokemonBattle, PokemonBattle>();
+builder.Services.AddScoped<IPokemonAttacker, PokemonAttacker>();
 
 var app = builder.Build();
 

@@ -21,7 +21,7 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     private List<Pokemon> pokemonList { get; set; }
     private readonly HttpClient client;
     private IPokemonDb pokemonDbTest = new PokemonDbTest();
-    private IPokemonBattle pokemonBattleTest = new PokemonBattleTest();
+
     public PokemonControllerAcceptanceTestShould(CustomWepApplicationFactory<Program> factory)
     {
         client = factory.CreateClient();
@@ -87,9 +87,10 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
     [Fact]
     public async Task PokemonBattle()
     {
+        
         var response = await client.GetAsync("/Pokemon/Combat?pkOne=1&pkTwo=2");
         var responseContent = await response.Content.ReadAsStringAsync();
         
-        responseContent.Should().Match($"Bulbasaur: * HP | Ivysaur: * HP");
+        responseContent.Should().Match($"Bulbasaur: 40 HP | Ivysaur: 55 HP");
     }
 }

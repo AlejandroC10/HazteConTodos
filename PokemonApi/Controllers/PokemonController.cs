@@ -10,10 +10,14 @@ namespace PokemonApi.Controllers;
 public class PokemonController : ControllerBase
 {
     private IPokemonDb pokemonDataBase;
+    private IPokemonAttacker pokemonAttacker;
+    private IPokemonBattle pokemonBattle;
 
-    public PokemonController(IPokemonDb pokemonDb)
+    public PokemonController(IPokemonDb pokemonDb, IPokemonAttacker pokemonAtt, IPokemonBattle pokemonBttl)
     {
         pokemonDataBase = pokemonDb;
+        pokemonAttacker = pokemonAtt;
+        pokemonBattle = pokemonBttl;
     }
 
     [HttpGet]
@@ -67,12 +71,11 @@ public class PokemonController : ControllerBase
 
         var pokemonOne = pokedex.FindPokemonById(pkOne);
         var pokemonTwo = pokedex.FindPokemonById(pkTwo);
-
-        var pokemonBattle = new PokemonBattle();
+        
         pokemonBattle.CreateBattle(pokemonOne, pokemonTwo);
         pokemonBattle.Combat();
-
-        if (pokemonBattle.CombatWinner != null)
+        
+        if (pokemonBattle.PokemonBattleInfo.CombatWinner != null)
         {
             pokemonBattle.DeleteBattle();    
         }
@@ -81,6 +84,6 @@ public class PokemonController : ControllerBase
             pokemonBattle.SaveBattle();
         }
         
-        return Ok(pokemonBattle.CombatStatus);
+        return Ok(pokemonBattle.PokemonBattleInfo.CombatStatus);
     }
 }

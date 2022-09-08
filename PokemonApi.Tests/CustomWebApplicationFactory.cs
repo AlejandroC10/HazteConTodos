@@ -20,6 +20,10 @@ public class CustomWepApplicationFactory<TStartup> : WebApplicationFactory<TStar
                         var pokemonBattle = services.SingleOrDefault(serviceDescriptor => serviceDescriptor.ServiceType == typeof(IPokemonBattle));
                         services.Remove(pokemonBattle);
                         services.AddScoped<IPokemonBattle, PokemonBattleTest>();
+                        
+                        var pokemonAttacker = services.SingleOrDefault(serviceDescriptor => serviceDescriptor.ServiceType == typeof(IPokemonAttacker));
+                        services.Remove(pokemonAttacker);
+                        services.AddScoped<IPokemonAttacker, PokemonAttackerTest>();
                 });
         }
 }

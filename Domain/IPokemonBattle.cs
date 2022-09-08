@@ -4,9 +4,8 @@ namespace Domain;
 
 public interface IPokemonBattle
 {
-    public List<Pokemon> SelectedPokemon { get; set; }
-    public string? CombatWinner { get; set; }
-    public string CombatStatus { get; set; }
+    public PokemonBattleInfo PokemonBattleInfo { get; set; }
+    public IPokemonAttacker PokemonAttacker { get; set; }
     
     public void CreateBattle(Pokemon pokemonOne, Pokemon pokemonTwo)
     {
