@@ -68,23 +68,12 @@ public class PokemonController : ControllerBase
     public IActionResult Get(int pkOne, int pkTwo)
     {
         var pokedex = new Pokedex(pokemonDataBase);
+        var pokemonBattleHandler = new PokemonBattleHandler(pokemonBattleDataBase, pokemonAttacker);
 
-        var pokemonOne = pokedex.FindPokemonById(pkOne);
-        var pokemonTwo = pokedex.FindPokemonById(pkTwo);
+        var pokemon1 = pokedex.FindPokemonById(pkOne);
+        var pokemon2 = pokedex.FindPokemonById(pkTwo);
 
-        var pokemonBattle = new PokemonBattle(pokemonAttacker);
-        pokemonBattle.CreateBattle(pokemonOne, pokemonTwo);
-        pokemonBattleDataBase.LoadBattle(pokemonBattle);
-        pokemonBattle.Combat();
-        
-        if (pokemonBattle.PokemonBattleInfo.CombatWinner != null)
-        {
-            pokemonBattleDataBase.DeleteBattle(pokemonBattle);    
-        }
-        else
-        {
-            pokemonBattleDataBase.SaveBattle(pokemonBattle);
-        }
+        var pokemonBattle = pokemonBattleHandler.BattleHandler(pokemon1, pokemon2);
         
         return Ok(pokemonBattle.PokemonBattleInfo.CombatStatus);
     }
