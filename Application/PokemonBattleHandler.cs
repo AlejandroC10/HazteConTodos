@@ -1,6 +1,7 @@
 ﻿using Domain;
+using Infrastructure;
 
-namespace Infrastructure;
+namespace Application;
 
 public class PokemonBattleHandler
 {
