@@ -75,6 +75,6 @@ public class PokemonController : ControllerBase
 
         var pokemonBattle = pokemonBattleHandler.BattleHandler(pokemon1, pokemon2);
         
-        return Ok(pokemonBattle.PokemonBattleInfo.CombatStatus);
+        return Ok(pokemonBattle.PokemonBattleInfo);
     }
 }

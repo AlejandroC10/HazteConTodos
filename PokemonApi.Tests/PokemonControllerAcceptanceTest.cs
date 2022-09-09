@@ -90,7 +90,18 @@ public class PokemonControllerAcceptanceTestShould: IClassFixture<CustomWepAppli
         
         var response = await client.GetAsync("/Pokemon/Combat?pkOne=1&pkTwo=2");
         var responseContent = await response.Content.ReadAsStringAsync();
+        var battle = JsonConvert.DeserializeObject<PokemonBattleInfo>(responseContent);
+        var expectedPokemon = new List<Pokemon>
+        { 
+            pokemonList.Find(pokemon => pokemon.Id == 1),
+            pokemonList.Find(pokemon => pokemon.Id == 2)
+        };
+        expectedPokemon[0].Stats["HP"] = 40;
+        expectedPokemon[1].Stats["HP"] = 55;
         
-        responseContent.Should().Match($"Bulbasaur: 40 HP | Ivysaur: 55 HP");
+        
+        battle.CombatStatus.Should().Be("Bulbasaur: 40 HP | Ivysaur: 55 HP");
+        battle.CombatWinner.Should().BeNull();
+        battle.SelectedPokemon.Should().BeEquivalentTo(expectedPokemon);
     }
 }
