@@ -16,14 +16,12 @@ public class PokemonAttackerShould
     public void GiveAttacker()
     {
         // Arrange
-        var pkAttacker = Substitute.For<IPokemonAttacker>();
+        var pkAttacker = new PokemonAttacker();
 
         // Act
-        pkAttacker.CalculateDamage(10).Returns(5);
         var attack = pkAttacker.CalculateDamage(10);
         
         // Assert
-        attack.Should().Be(5);
         attack.Should().BeLessThan(10);
         attack.Should().BeGreaterOrEqualTo(1);
     }
