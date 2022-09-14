@@ -1,3 +1,4 @@
+using Application;
 using Domain;
 using Infrastructure;
 
@@ -13,6 +14,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPokemonDb, PokemonDb>();
 builder.Services.AddScoped<IPokemonBattleDb, PokemonBattleDb>();
 builder.Services.AddScoped<IPokemonAttacker, PokemonAttacker>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -22,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 

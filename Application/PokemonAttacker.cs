@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿using Domain;
+
+namespace Application;
 
 public class PokemonAttacker: IPokemonAttacker
 {
